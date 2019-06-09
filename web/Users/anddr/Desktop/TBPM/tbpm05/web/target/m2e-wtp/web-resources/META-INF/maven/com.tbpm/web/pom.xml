@@ -1,0 +1,111 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.tbpm</groupId>
+	<artifactId>web</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+
+	<name>Activiti Web</name>
+
+<!-- 	<properties> -->
+<!-- 		<maven.compiler.source>1.8</maven.compiler.source> -->
+<!-- 		<maven.compiler.target>1.8</maven.compiler.target> -->
+<!-- 	</properties> -->
+
+	<dependencies>
+		<!-- Servlet -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>4.0.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- JSF API -->
+		<dependency>
+			<groupId>org.glassfish</groupId>
+			<artifactId>javax.faces</artifactId>
+			<version>2.2.4</version>
+		</dependency>
+
+		<!-- WELD -->
+		<dependency>
+			<groupId>org.jboss.weld.servlet</groupId>
+			<artifactId>weld-servlet-shaded</artifactId>
+			<version>3.0.3.Final</version>
+		</dependency>
+
+		<!-- PrimeFaces -->
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>6.2</version>
+		</dependency>
+
+		<!-- Facelets -->
+		<dependency>
+			<groupId>com.sun.facelets</groupId>
+			<artifactId>jsf-facelets</artifactId>
+			<version>1.1.14</version>
+		</dependency>
+
+		<!-- Log4j -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+
+		<!-- API REST -->
+		<dependency>
+			<groupId>com.mashape.unirest</groupId>
+			<artifactId>unirest-java</artifactId>
+			<version>1.4.9</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.3.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpasyncclient</artifactId>
+			<version>4.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpmime</artifactId>
+			<version>4.3.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20140107</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.6</version>
+		</dependency>
+
+	</dependencies>
+<!-- 	<build> -->
+<!-- 		<finalName>activiti-web</finalName> -->
+<!-- 		<plugins> -->
+<!-- 			<plugin> -->
+<!-- 				<groupId>org.apache.tomcat.maven</groupId> -->
+<!-- 				<artifactId>tomcat7-maven-plugin</artifactId> -->
+<!-- 				<version>2.2</version> -->
+<!-- 				<configuration> -->
+<!-- 					<url>http://localhost:8080/manager/text</url> -->
+<!-- 					<server>TomcatServer</server> -->
+<!-- 					<path>/tbpm-web</path> -->
+<!-- 				</configuration> -->
+<!-- 			</plugin> -->
+<!-- 		</plugins> -->
+<!-- 	</build> -->
+</project>

@@ -1,0 +1,45 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets" template="/template.xhtml">
+
+	<ui:define name="content">
+		<div class="ui-g">
+			<div class="ui-g-3"></div>
+			<div class="ui-g-6">
+				<h:form enctype="multipart/form-data">
+					<p:growl id="growl" showDetail="true" sticky="true" />
+
+					<ui:param name="dp" value="#{postularseConvocatoria.datosPostulacion}" />
+					<h:panelGrid columns="2" columnClasses="label, value">
+						<p:outputLabel for="nombre" value="Nombre:" />
+						<p:inputText id="nombre" value="#{dp.nombre}" required="true" />
+
+						<p:outputLabel for="apellido" value="Apellido:" />
+						<p:inputText id="apellido" value="#{dp.apellido}" required="true" />
+
+						<p:outputLabel for="ci" value="C.I.:" />
+						<p:inputText id="ci" value="#{dp.ci}" required="true" />
+
+						<p:outputLabel for="carrera" value="Carrera: " />
+						<p:inputText id="carrera" value="#{dp.carrera}" required="true" />
+
+						<p:outputLabel for="cantCreditos" value="Cantidad de creditos en la carrera:" />
+						<p:inputText id="cantCreditos" value="#{dp.cantCreditos}" required="true" />
+
+						<p:outputLabel for="universidad" value="Universidad destino elegida:" />
+						<p:inputText id="universidad" value="#{dp.universidad}" required="true" />
+
+						<p:outputLabel for="cv" value="CV con la escolaridad correspodiente: " />
+						<p:fileUpload id="cv" value="#{postularseConvocatoria.datosPostulacion.cv}" mode="simple" skinSimple="true"/>
+						
+
+					</h:panelGrid>
+
+					<p:commandButton value="Confirmar" id="confirm" actionListener="#{postularseConvocatoria.actionConfirm}" ajax="false" styleClass="ui-priority-primary" />
+
+				</h:form>
+			</div>
+			<div class="ui-g-3"></div>
+		</div>
+	</ui:define>
+</ui:composition>
+

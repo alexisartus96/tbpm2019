@@ -1,0 +1,16 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+
+	<h:form>
+		<p:menubar>
+			<p:menuitem value="Inicio" icon="fa fa-home" url="/" />
+			<p:menuitem value="Iniciar proceso de movilidad" icon="fa fa-plus-square" url="/view/iniciar-instancia.xhtml" rendered="#{login.activeUser eq 'DGRC'}" />
+			<p:menuitem value="Ver convocatoria" icon="fa fa-eye" url="/view/convocatoria.xhtml" rendered="#{login.activeUser eq 'DECANATO'}" />
+			<p:menuitem value="Ver convocatorias vigentes" icon="fa fa-eye" url="/view/convocatorias-vigentes.xhtml" />
+
+			<f:facet name="options">
+				<p:commandButton  value="Salir" icon="ui-icon-extlink" actionListener="#{login.logout}" ajax="false" rendered="#{not empty login.activeUser}"/>
+			</f:facet>
+		</p:menubar>
+	</h:form>
+</ui:composition>
