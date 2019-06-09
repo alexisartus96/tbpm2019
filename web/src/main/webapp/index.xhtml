@@ -1,0 +1,30 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets" template="/template.xhtml">
+
+	<ui:define name="content">
+		<ui:fragment rendered="#{empty login.activeUser}">
+		<h:form>
+			<div class="flex-container">
+				<h:panelGrid columns="2" cellpadding="5">
+					<h:outputLabel for="username" value="Username:" />
+					<p:inputText id="username" value="#{login.user}" required="true" label="username" />
+
+					<h:outputLabel for="password" value="Password:" />
+					<p:password id="password" value="#{login.password}" required="true" label="password" />
+
+					<f:facet name="footer">
+						<p:commandButton value="Login" actionListener="#{login.login}" ajax="false"/>
+					</f:facet>
+				</h:panelGrid>
+			</div>
+		</h:form>
+		</ui:fragment>
+		
+		<ui:fragment rendered="#{not empty login.activeUser}">
+			<div class="flex-container">
+				Bienvenido #{login.user}
+			</div>
+		</ui:fragment>
+		
+	</ui:define>
+</ui:composition>

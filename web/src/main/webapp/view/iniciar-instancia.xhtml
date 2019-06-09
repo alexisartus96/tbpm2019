@@ -1,0 +1,54 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets" template="/template.xhtml">
+
+	<ui:define name="content">
+		<div class="ui-g">
+			<div class="ui-g-3"></div>
+			<div class="ui-g-6">
+				<h:form>
+					<p:growl id="growl" showDetail="true" sticky="true" /> 
+				
+					<ui:param name="dm" value="#{iniciarInstancia.datosMovilidad}" />
+					<h:panelGrid columns="2" columnClasses="label, value">
+						<p:outputLabel for="movilidad" value="Movilidad:" />
+						<p:inputText id="movilidad" value="#{dm.movilidad}" required="true" />
+
+						<p:outputLabel for="convocatoria" value="Convocatoria:" />
+						<p:inputText id="convocatoria" value="#{dm.convocatoria}" required="true" placeholder="Ej: primera, segunda, etc" />
+
+						<p:outputLabel for="fecha-postulaciones" value="Fecha prevista para inicio de postulaciones :" />
+						<p:calendar id="fecha-postulaciones" value="#{dm.fechaPostulaciones}" required="true" showOn="button" />
+
+						<p:outputLabel for="carreras-involucradas" value="Carreras involucradas:" />
+						<p:inputText id="carreras-involucradas" value="#{dm.carrerasInvolucradas}" required="true"
+							placeholder="En caso de aplicar más de una, separar las mismas con ';'" />
+
+						<p:outputLabel for="duracion" value="Duración prevista:" />
+						<p:inputText id="duracion" value="#{dm.duracionPrevista}" required="true" placeholder="Ej: 6 meses, 1 año, etc." />
+
+
+						<p:outputLabel for="bases" value="Bases:" />
+						<p:inputText id="bases" value="#{dm.bases}" required="true" />
+
+
+						<p:outputLabel for="descripcion" value="Descripción:" />
+						<p:inputText id="descripcion" value="#{dm.descripcion}" required="true" />
+
+						<p:outputLabel for="nombre-dgrc" value="Nombre completo del contacto de DGRC:" />
+						<p:inputText id="nombre-dgrc" value="#{dm.nombreDGRC}" required="true" />
+
+						<p:outputLabel for="mail-dgrc" value="Dirección de mail del contacto de DGRC:" />
+						<p:inputText id="mail-dgrc" value="#{dm.mailDGRC}" required="true" placeholder="example@server.com" />
+					</h:panelGrid>
+
+					<p:commandButton value="Confirmar" id="confirm" actionListener="#{iniciarInstancia.actionConfirm}" ajax="false" styleClass="ui-priority-primary" />
+
+				</h:form>
+			</div>
+			<div class="ui-g-3"></div>
+		</div>
+
+
+	</ui:define>
+</ui:composition>
+

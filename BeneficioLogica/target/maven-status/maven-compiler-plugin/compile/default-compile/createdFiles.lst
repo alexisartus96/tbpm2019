@@ -1,0 +1,17 @@
+persistencia\Solicitud.class
+controlador\ChequearSolicitud.class
+persistencia\SolicitudPK.class
+controlador\ArmarListaSolicitudInvalida.class
+controlador\LimpiarFormularioSolicitud.class
+test\Test.class
+controlador\CargarValida.class
+controlador\EvaluarSolicitud.class
+persistencia\IngresarSolicitud.class
+controlador\EvaluarPropuesta.class
+controlador\RecibirInfoFaltante.class
+persistencia\Proceso.class
+controlador\MostrarSolicitud.class
+persistencia\IngresarPropuesta.class
+controlador\DesignarIntegrantes.class
+controlador\CorregirLista.class
+controlador\MostrarSolicitudFlecha.class

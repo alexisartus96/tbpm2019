@@ -1,0 +1,30 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets" template="/template.xhtml">
+
+	<ui:define name="content">
+		<div class="flex-container">
+			<p:dataTable var="it" value="#{convocatoriasVigentes.convocatorias}">
+				<p:column headerText="Número">
+					<h:outputText value="#{it.numero}" />
+				</p:column>
+
+				<p:column headerText="Movilidad">
+					<h:outputText value="#{it.movilidad}" />
+				</p:column>
+
+				<p:column headerText="Convocatoria">
+					<h:outputText value="#{it.convocatoria}" />
+				</p:column>
+
+
+
+				<p:column>
+					<p:commandLink id="ajax" actionListener="#{postularseConvocatoria.redirect(it.numero)}" rendered="#{empty login.activeUser and it.recibirPostulaciones}">
+						<h:outputText value="Postularse" />
+					</p:commandLink>
+				</p:column>
+
+			</p:dataTable>
+		</div>
+	</ui:define>
+</ui:composition>

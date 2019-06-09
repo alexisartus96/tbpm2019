@@ -1,0 +1,35 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets" template="/template.xhtml">
+
+	<ui:define name="content">
+		<div class="flex-container">
+			<h:form>
+				<p:growl id="growl" showDetail="true" sticky="false" />
+				<h:panelGrid columns="2" columnClasses="label, value">
+					<p:outputLabel for="numero-convocatoria" value="Número convocatoria:" />
+					<p:inputText id="numero-convocatoria" value="#{convocatoria.processInstanceId}" required="true" />
+				</h:panelGrid>
+				<p:commandButton value="Confirmar" id="confirm" actionListener="#{convocatoria.loadActividades}" ajax="true" update="datos-convocatoria,growl"
+					styleClass="ui-priority-primary" />
+
+				<p:dataTable var="it" value="#{convocatoria.actividadesList}" id="datos-convocatoria">
+					<p:column headerText="Nombre">
+						<h:outputText value="#{it.nombre}" />
+					</p:column>
+
+					<p:column headerText="Fecha comienzo">
+						<h:outputText value="#{it.fechaComienzo}" />
+					</p:column>
+
+					<p:column headerText="Fecha fin">
+						<h:outputText value="#{it.fechaFin}" />
+					</p:column>
+
+					<p:column headerText="Responsable">
+						<h:outputText value="#{it.responsable}" />
+					</p:column>
+				</p:dataTable>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>
