@@ -29,9 +29,8 @@ import web.beans.DatosPostulacionBean;
 
 @Named
 @SessionScoped
-public class PostularseConvocatoria implements Serializable {
+public class PostularseBeneficio implements Serializable {
 	private static final long serialVersionUID = -9118252853052412615L;
-	private static final Logger logger = Logger.getLogger(PostularseConvocatoria.class);
 
 	private String user = "admin";
 	private String password = "test";
@@ -42,7 +41,6 @@ public class PostularseConvocatoria implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		logger.log(Level.INFO, "Init");
 		datosPostulacion = new DatosPostulacionBean();
 	}
 
@@ -99,7 +97,6 @@ public class PostularseConvocatoria implements Serializable {
 					.put("taskId", taskId)
 					.put("properties", properties);
 
-			logger.log(Level.INFO, body);
 
 			Unirest.post("http://localhost:8080/activiti-rest/service/form/form-data")
 					.basicAuth("admin", "test")
@@ -108,13 +105,11 @@ public class PostularseConvocatoria implements Serializable {
 					.body(body)
 					.asJson();
 
-			logger.log(Level.INFO, jsonResponse);
 
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Exito", "La postulación se ha registrado con exito."));
 			datosPostulacion = new DatosPostulacionBean();
 		} catch (UnirestException e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ocurrio un error al postularse"));
-			logger.log(Level.ERROR, e);
 			e.printStackTrace();
 		}
 	}
