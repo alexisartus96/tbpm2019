@@ -18,6 +18,7 @@ import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
 import beans.ActividadBean;
+import constantes.Constantes;
 
 @Named
 @SessionScoped
@@ -37,7 +38,7 @@ public class Convocatoria implements Serializable {
 		}
 		
 		try {
-			JSONObject jsonResponse = Unirest.get("http://localhost:8080/activiti-rest/service/history/historic-task-instances")
+			JSONObject jsonResponse = Unirest.get(Constantes.host+"/activiti-rest/service/history/historic-task-instances")
 					.basicAuth(user, password)
 					.queryString("processInstanceId", processInstanceId)
 					.asJson().getBody().getObject();

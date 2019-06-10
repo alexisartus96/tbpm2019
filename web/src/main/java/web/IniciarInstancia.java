@@ -21,6 +21,8 @@ import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
 import beans.DatosMovilidadBean;
+import beans.PropuestaDT;
+import constantes.Constantes;
 
 @Named
 @SessionScoped
@@ -29,15 +31,12 @@ public class IniciarInstancia implements Serializable {
 
 	private static final long serialVersionUID = -4732430916973701308L;
 
-	private DatosMovilidadBean datosMovilidad;
-	String processKey = "adjudicacionMovilidadAcademica";
-	String user = "admin";
-	String password = "test";
+	private PropuestaDT datosPropuesta;
 
 	@PostConstruct
 	public void init() {
 		logger.log(Level.INFO, "Init");
-		datosMovilidad = new DatosMovilidadBean();
+		datosPropuesta = new PropuestaDT();
 	}
 
 	public void actionConfirm(ActionEvent actionEvent) throws UnirestException {
@@ -45,17 +44,17 @@ public class IniciarInstancia implements Serializable {
 		FacesContext context = FacesContext.getCurrentInstance();
 		try {
 			// Inicio la instancia del proceso
-			JSONObject jsonResponse = Unirest.post("http://localhost:8080/activiti-rest/service/runtime/process-instances")
-					.basicAuth(user, password)
+			JSONObject jsonResponse = Unirest.post(Constantes.host+"/activiti-rest/service/runtime/process-instances")
+					.basicAuth(Constantes.user, Constantes.password)
 					.header("Content-Type", "application/json")
 					.header("accept", "application/json")
-					.body(new JSONObject().put("processDefinitionKey", processKey))
+					.body(new JSONObject().put("processDefinitionKey", Constantes.processKey))
 					.asJson().getBody().getObject();
 			String processId = jsonResponse.getString("id");
 
 			// Obtengo la taskId de la tarea "Ingreso llamado de movilidad"
-			jsonResponse = Unirest.get("http://localhost:8080/activiti-rest/service/runtime/tasks")
-					.basicAuth(user, password)
+			jsonResponse = Unirest.get(Constantes.host+"/activiti-rest/service/runtime/tasks")
+					.basicAuth(Constantes.user, Constantes.password)
 					.header("Content-Type", "application/json")
 					.header("accept", "application/json")
 					.queryString("processInstanceId", processId)
@@ -66,8 +65,8 @@ public class IniciarInstancia implements Serializable {
 			JSONObject body = new JSONObject()
 					.put("assignee", "dgrc");
 
-			Unirest.put("http://localhost:8080/activiti-rest/service/runtime/tasks/{taskId}")
-					.basicAuth(user, password)
+			Unirest.put(Constantes.host+"/activiti-rest/service/runtime/tasks/{taskId}")
+					.basicAuth(Constantes.user, Constantes.password)
 					.routeParam("taskId", taskId)
 					.header("Content-Type", "application/json")
 					.body(body)
@@ -75,15 +74,16 @@ public class IniciarInstancia implements Serializable {
 
 			// Hago el submit del form
 			Map<String, Object> props = new HashMap();
-			props.put("movilidad", datosMovilidad.getMovilidad());
-			props.put("convocatoria", datosMovilidad.getConvocatoria());
-			props.put("fechaPrevistaInicioPostulaciones", datosMovilidad.getFechaPostulaciones());
-			props.put("carrerasInvolucradas", datosMovilidad.getCarrerasInvolucradas());
-			props.put("duracionPrevista", datosMovilidad.getDuracionPrevista());
-			props.put("basesMovilidad", datosMovilidad.getBases());
-			props.put("descripcionMovilidad", datosMovilidad.getDescripcion());
-			props.put("nombreContactoDGRC", datosMovilidad.getNombreDGRC());
-			props.put("mailContactoDGRC", datosMovilidad.getMailDGRC());
+			props.put("identificacion", datosPropuesta.getIdentificacion());
+			props.put("fecha_prevista", datosPropuesta.getFecha_prevista());
+			props.put("bases_llamado", datosPropuesta.getBases_llamado());
+			props.put("monto_total", datosPropuesta.getMonto_total());
+			props.put("alto", datosPropuesta.getAlto());
+			props.put("medio", datosPropuesta.getMedio());
+			props.put("bajo", datosPropuesta.getBajo());
+			props.put("descripcion", datosPropuesta.getDescripcion());
+			props.put("persona_bps", datosPropuesta.getPersona_bps());
+			props.put("mail", datosPropuesta.getMail());
 
 			List<JSONObject> properties = new ArrayList();
 			for (Map.Entry<String, Object> e : props.entrySet()) {
@@ -100,7 +100,7 @@ public class IniciarInstancia implements Serializable {
 
 			logger.log(Level.INFO, body);
 
-			Unirest.post("http://localhost:8080/activiti-rest/service/form/form-data")
+			Unirest.post(Constantes.host+"/activiti-rest/service/form/form-data")
 					.basicAuth("admin", "test")
 					.header("Content-Type", "application/json")
 					.header("accept", "application/json")
@@ -109,7 +109,7 @@ public class IniciarInstancia implements Serializable {
 
 			logger.log(Level.INFO, jsonResponse);
 
-			context.addMessage(null, new FacesMessage("Exito", "La movilidad " + datosMovilidad.getMovilidad() + " se ha creado corectamente."));
+			context.addMessage(null, new FacesMessage("Exito", "La movilidad " + datosPropuesta.getIdentificacion() + " se ha creado corectamente."));
 
 		} catch (UnirestException e) {
 			logger.log(Level.ERROR, "Error al iniciar instancia enviando post a api-rest", e);
@@ -118,15 +118,15 @@ public class IniciarInstancia implements Serializable {
 		}
 		// Como estoy usando sessionScope, reseteo manualmente el bean de datos movilidad, para que no aparezcan nuevamente los datos
 		// al entrar por segunda vez a la pagina.
-		datosMovilidad = new DatosMovilidadBean();
+		datosPropuesta = new PropuestaDT();
 	}
 
-	public DatosMovilidadBean getDatosMovilidad() {
-		return datosMovilidad;
+	public PropuestaDT getDatosPropuesta() {
+		return datosPropuesta;
 	}
 
-	public void setDatosMovilidad(DatosMovilidadBean datosMovilidad) {
-		this.datosMovilidad = datosMovilidad;
+	public void setDatosMovilidad(PropuestaDT datosPropuesta) {
+		this.datosPropuesta = datosPropuesta;
 	}
 
 }

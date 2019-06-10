@@ -18,6 +18,7 @@ import org.json.JSONObject;
 import com.mashape.unirest.http.Unirest;
 
 import beans.ConvocatoriaBean;
+import constantes.Constantes;
 
 @Named
 @SessionScoped
@@ -35,10 +36,10 @@ public class ConvocatoriasVigentes implements Serializable {
 
 			// Obtengo las instancias del proceso adjudicacionMovilidadAcademica
 			JSONObject body = new JSONObject()
-					.put("processDefinitionKey", "adjudicacionMovilidadAcademica")
+					.put("processDefinitionKey", "process")
 					.put("includeProcessVariables", "true");
 
-			JSONObject jsonResponse = Unirest.post("http://localhost:8080/activiti-rest/service/query/process-instances")
+			JSONObject jsonResponse = Unirest.post(Constantes.host+"/activiti-rest/service/query/process-instances")
 					.basicAuth(user, password)
 					.header("Content-Type", "application/json")
 					.body(body)
@@ -57,7 +58,7 @@ public class ConvocatoriasVigentes implements Serializable {
 					String numero = process.getString("id");
 					
 					// Me fijo si la movilidad se encuentra recibiendo postulaciones
-					jsonResponse = Unirest.get("http://localhost:8080/activiti-rest/service/runtime/tasks")
+					jsonResponse = Unirest.get(Constantes.host+"/activiti-rest/service/runtime/tasks")
 							.basicAuth(user, password)
 							.queryString("processInstanceId", numero)
 							.asJson().getBody().getObject();
