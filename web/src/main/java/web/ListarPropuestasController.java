@@ -1,6 +1,8 @@
 package web;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,24 +19,23 @@ import org.json.JSONObject;
 
 import com.mashape.unirest.http.Unirest;
 
-import beans.ConvocatoriaBean;
+import beans.PropuestaDT;
 import constantes.Constantes;
 
 @Named
 @SessionScoped
-public class ConvocatoriasVigentes implements Serializable {
+public class ListarPropuestasController implements Serializable {
 	private static final long serialVersionUID = -6931979465784683151L;
-	private static final Logger logger = Logger.getLogger(ConvocatoriasVigentes.class);
+	private static final Logger logger = Logger.getLogger(ListarPropuestasController.class);
 
 	private String user = "admin";
 	private String password = "test";
 
-	public List<ConvocatoriaBean> getConvocatorias() {
-		List<ConvocatoriaBean> convocatorias = new ArrayList<ConvocatoriaBean>();
+	public List<PropuestaDT> getPropuestas() {
+		List<PropuestaDT> propuestas = new ArrayList<PropuestaDT>();
 
 		try {
 
-			// Obtengo las instancias del proceso adjudicacionMovilidadAcademica
 			JSONObject body = new JSONObject()
 					.put("processDefinitionKey", "process")
 					.put("includeProcessVariables", "true");
@@ -51,34 +52,33 @@ public class ConvocatoriasVigentes implements Serializable {
 
 				Map<String, String> variables = parseVariables(process.getJSONArray("variables"));
 
-				// Si la movilidad esta aprobada la agrego a la lista de movilidades que voy a mostrar
-				if (variables.containsKey("rn_aprobacionCronograma") && variables.get("rn_aprobacionCronograma").equals("Si")) {
-					String movilidad = variables.get("movilidad");
-					String convocatoria = variables.get("convocatoria");
+				if (variables.containsKey("propuesta_validada") && variables.get("propuesta_validada").equals("true")) {
+					
+					String fecha_prevista = variables.get("fecha_prevista_string");
+					String bases_llamado = variables.get("bases_llamado");
 					String numero = process.getString("id");
 					
-					// Me fijo si la movilidad se encuentra recibiendo postulaciones
 					jsonResponse = Unirest.get(Constantes.host+"/activiti-rest/service/runtime/tasks")
 							.basicAuth(user, password)
 							.queryString("processInstanceId", numero)
 							.asJson().getBody().getObject();
-					Boolean recibirPostulaciones = jsonResponse.getJSONArray("data").getJSONObject(0).getString("name").equals("Recibir postulaciones");
-
-					ConvocatoriaBean convocatoriaBean = new ConvocatoriaBean();
-					convocatoriaBean.setMovilidad(movilidad);
-					convocatoriaBean.setConvocatoria(convocatoria);
-					convocatoriaBean.setNumero(numero);
-					convocatoriaBean.setRecibirPostulaciones(recibirPostulaciones);
-					convocatorias.add(convocatoriaBean);
+					Boolean recibirSolicitud = jsonResponse.getJSONArray("data").getJSONObject(0).getString("name").equals("Recibir Solicitudes");
+					
+					PropuestaDT propuesta = new PropuestaDT();
+					SimpleDateFormat df= new SimpleDateFormat("yyyy-MM-dd");
+					propuesta.setFecha_prevista_date(df.parse(fecha_prevista));
+					propuesta.setIdentificacion(Long.valueOf(numero));
+					propuesta.setBases_llamado(bases_llamado);
+					propuesta.setRecibirSolicitud(recibirSolicitud);
+					propuestas.add(propuesta);
 				}
-
 			}
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error", "Ocurrio un error al obtener las convocatorias vigentes."));
 			e.printStackTrace();
 		}
-
-		return convocatorias;
+		
+		return propuestas;
 	}
 
 	/**
@@ -108,7 +108,7 @@ public class ConvocatoriasVigentes implements Serializable {
 	}
 
 	public static void main(String args[]) {
-		(new ConvocatoriasVigentes()).getConvocatorias();
+		(new ListarPropuestasController()).getPropuestas();
 	}
 }
 
