@@ -43,6 +43,8 @@ public class Proceso implements Serializable {
 	private String mailBps;
 
 	private Long medio;
+	
+	private Boolean validado;
 
 	@Column(name="monto_total")
 	private Long montoTotal;
@@ -149,6 +151,14 @@ public class Proceso implements Serializable {
 
 	public void setMontoTotal(Integer integer) {
 		montoTotal= new Long(integer.toString());
+	}
+
+	public Boolean getValidado() {
+		return validado;
+	}
+
+	public void setValidado(Boolean validado) {
+		this.validado = validado;
 	}
 
 }

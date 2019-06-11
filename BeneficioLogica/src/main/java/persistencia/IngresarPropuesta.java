@@ -38,6 +38,7 @@ public class IngresarPropuesta implements TaskListener{
 		if(variables.get("fecha_prevista")!=null)
 			try {
 				proceso.setFechaPrevista(df.parse(((LocalDate)variables.get("fecha_prevista")).toString()));
+				delegateTask.getExecution().setVariable("fecha_prevista_string", ((LocalDate)variables.get("fecha_prevista")).toString());
 			} catch (ParseException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
