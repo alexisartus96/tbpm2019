@@ -21,6 +21,7 @@ public class PropuestaDT {
 	private String descripcion;
 	private String persona_bps;
 	private String mail;
+	private Boolean recibirSolicitud;
 	
 	public Long getIdentificacion() {
 		return identificacion;
@@ -91,5 +92,11 @@ public class PropuestaDT {
 		SimpleDateFormat df= new SimpleDateFormat("yyyy-MM-dd");
 		this.fecha_prevista = LocalDate.parse(df.format(fecha_prevista_date));
 		this.fecha_prevista_date = fecha_prevista_date;
+	}
+	public Boolean getRecibirSolicitud() {
+		return recibirSolicitud;
+	}
+	public void setRecibirSolicitud(Boolean recibirSolicitud) {
+		this.recibirSolicitud = recibirSolicitud;
 	}
 }
