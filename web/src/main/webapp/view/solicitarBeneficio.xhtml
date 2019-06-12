@@ -8,7 +8,7 @@
 				<h:form enctype="multipart/form-data">
 					<p:growl id="growl" showDetail="true" sticky="true" />
 
-					<ui:param name="dp" value="#{postularseConvocatoria.datosPostulacion}" />
+					<ui:param name="dp" value="#{solicitarBeneficio.datosDolicitud}" />
 					<h:panelGrid columns="2" columnClasses="label, value">
 						<p:outputLabel for="nombre" value="Nombre:" />
 						<p:inputText id="nombre" value="#{dp.nombre}" required="true" />

@@ -20,25 +20,27 @@ import org.primefaces.model.UploadedFile;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
+import beans.SolicitudDT;
+import constantes.Constantes;
 //import alfrescoConection.ConectorAlfresco;
 //import alfrescoConection.FileUploader;
 import web.beans.DatosPostulacionBean;
 
 @Named
 @SessionScoped
-public class PostularseBeneficio implements Serializable {
+public class SolicitarBeneficio implements Serializable {
 	private static final long serialVersionUID = -9118252853052412615L;
 
 	private String user = "admin";
 	private String password = "test";
 	private String processInstanceId;
 
-	private DatosPostulacionBean datosPostulacion;
+	private SolicitudDT datosSolicitud;
 
 
 	@PostConstruct
 	public void init() {
-		datosPostulacion = new DatosPostulacionBean();
+		datosSolicitud = new SolicitudDT();
 	}
 
 	public void redirect(String processId) throws IOException {
@@ -56,17 +58,17 @@ public class PostularseBeneficio implements Serializable {
 
 	public void actionConfirm() throws IOException {
 		try {
-			UploadedFile uploadedfile = datosPostulacion.getCv();
-			String fileName = uploadedfile.getFileName();
-			String prefix = fileName.split("\\.")[0];
-			String suffix = fileName.split("\\.")[1];
-			String mimeType = uploadedfile.getContentType();
+//			UploadedFile uploadedfile = datosPostulacion.getCv();
+//			String fileName = uploadedfile.getFileName();
+//			String prefix = fileName.split("\\.")[0];
+//			String suffix = fileName.split("\\.")[1];
+//			String mimeType = uploadedfile.getContentType();
 //			File file = FileUploader.stream2file(datosPostulacion.getCv().getInputstream(), prefix, suffix);
 //			String url = ConectorAlfresco.getInstance().subirArchivo(file, fileName, mimeType);
 
 			// Obtengo la task id
-			JSONObject jsonResponse = Unirest.get("http://localhost:8080/activiti-rest/service/runtime/tasks")
-					.basicAuth(user, password)
+			JSONObject jsonResponse = Unirest.get(Constantes.host+"/activiti-rest/service/runtime/tasks")
+					.basicAuth(Constantes.user, Constantes.password)
 					.queryString("processInstanceId", processInstanceId)
 					.asJson().getBody().getObject();
 
@@ -74,12 +76,12 @@ public class PostularseBeneficio implements Serializable {
 
 			// Hago el submit del form
 			Map<String, Object> props = new HashMap();
-			props.put("t4_nombrePostulante", datosPostulacion.getNombre());
-			props.put("t4_apellidoPostulante", datosPostulacion.getApellido());
-			props.put("t4_ciPostulante", datosPostulacion.getCi());
-			props.put("t4_carreraPostulante", datosPostulacion.getCarrera());
-			props.put("t4_cantCreditosCarreraPostulante", datosPostulacion.getCantCreditos());
-			props.put("t4_universidadDestinoPostulante", datosPostulacion.getUniversidad());
+//			props.put("t4_nombrePostulante", datosPostulacion.getNombre());
+//			props.put("t4_apellidoPostulante", datosPostulacion.getApellido());
+//			props.put("t4_ciPostulante", datosPostulacion.getCi());
+//			props.put("t4_carreraPostulante", datosPostulacion.getCarrera());
+//			props.put("t4_cantCreditosCarreraPostulante", datosPostulacion.getCantCreditos());
+//			props.put("t4_universidadDestinoPostulante", datosPostulacion.getUniversidad());
 //			props.put("urlCV", url);
 
 			List<JSONObject> properties = new ArrayList();
@@ -105,18 +107,18 @@ public class PostularseBeneficio implements Serializable {
 
 
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Exito", "La postulación se ha registrado con exito."));
-			datosPostulacion = new DatosPostulacionBean();
+//			datosPostulacion = new DatosPostulacionBean();
 		} catch (UnirestException e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ocurrio un error al postularse"));
 			e.printStackTrace();
 		}
 	}
 
-	public DatosPostulacionBean getDatosPostulacion() {
-		return datosPostulacion;
-	}
-
-	public void setDatosPostulacion(DatosPostulacionBean datosPostulacion) {
-		this.datosPostulacion = datosPostulacion;
-	}
+//	public DatosPostulacionBean getDatosPostulacion() {
+//		return datosPostulacion;
+//	}
+//
+//	public void setDatosPostulacion(DatosPostulacionBean datosPostulacion) {
+//		this.datosPostulacion = datosPostulacion;
+//	}
 }
