@@ -1,6 +1,5 @@
 package web;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -11,12 +10,10 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.servlet.ServletContext;
 
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.primefaces.model.UploadedFile;
 
@@ -46,9 +43,10 @@ public class PostularseBeneficio implements Serializable {
 
 	public void redirect(String processId) throws IOException {
 		processInstanceId = processId;
-
-		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-		externalContext.redirect(externalContext.getApplicationContextPath() + "/view/postularse-convocatoria.xhtml");
+		ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+		FacesContext.getCurrentInstance().getExternalContext().redirect(servletContext.getContextPath() + "/view/postularse-convocatoria.xhtml");
+//		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+//		externalContext.redirect(externalContext.getApplicationContextPath() + "/view/postularse-convocatoria.xhtml");
 
 	}
 

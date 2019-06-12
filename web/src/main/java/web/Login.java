@@ -2,12 +2,11 @@ package web;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.Properties;
 
 import javax.enterprise.context.SessionScoped;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.servlet.ServletContext;
 
 //import properties.PropertiesMannager;
 
@@ -37,8 +36,10 @@ public class Login implements Serializable {
 		user = null;
 		password = null;
 		activeUser = null;
-		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-		externalContext.redirect(externalContext.getApplicationContextPath());
+		ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+		FacesContext.getCurrentInstance().getExternalContext().redirect(servletContext.getContextPath());
+//		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+//		externalContext.redirect(externalContext.getApplicationContextPath());
 	}
 
 	public String getUser() {
