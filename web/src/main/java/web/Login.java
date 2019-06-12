@@ -19,17 +19,14 @@ public class Login implements Serializable {
 	private String user;
 	private String password;
 	private String activeUser;
+	private Boolean bps;
 
 	public void login() throws IOException {
-//		Properties props = PropertiesMannager.getProperties();
-
-//		if (user.equals(props.getProperty("user.decanato")) && password.equals(props.getProperty("pass.decanato"))) {
-//			activeUser = "DECANATO";
-//		} else if (user.equals(props.getProperty("user.dgrc")) && password.equals(props.getProperty("pass.dgrc"))) {
-//			activeUser = "DGRC";
-//		} else {
-//			activeUser = null;
-//		}
+		if (user.contentEquals("bps") && password.contentEquals("12345")) {
+			activeUser="bps";
+		} else if (user.contentEquals("beneficios") && password.contentEquals("12345")) {
+			activeUser="beneficios";
+		}
 		activeUser=user;
 	}
 
@@ -37,6 +34,7 @@ public class Login implements Serializable {
 		user = null;
 		password = null;
 		activeUser = null;
+		bps = false;
 		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 		externalContext.redirect(externalContext.getApplicationContextPath());
 	}
@@ -59,5 +57,13 @@ public class Login implements Serializable {
 
 	public String getActiveUser() {
 		return activeUser;
+	}
+
+	public Boolean getBps() {
+		return bps;
+	}
+
+	public void setBps(Boolean bps) {
+		this.bps = bps;
 	}
 }
