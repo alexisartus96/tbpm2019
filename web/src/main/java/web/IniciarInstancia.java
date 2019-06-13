@@ -19,6 +19,7 @@ import org.json.JSONObject;
 
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import com.mashape.unirest.request.body.RequestBodyEntity;
 
 import beans.DatosMovilidadBean;
 import beans.PropuestaDT;
@@ -52,7 +53,7 @@ public class IniciarInstancia implements Serializable {
 					.asJson().getBody().getObject();
 			String processId = jsonResponse.getString("id");
 
-			// Obtengo la taskId de la tarea "Ingreso llamado de movilidad"
+			// Obtengo la taskId de la tarea
 			jsonResponse = Unirest.get(Constantes.host+"/activiti-rest/service/runtime/tasks")
 					.basicAuth(Constantes.user, Constantes.password)
 					.header("Content-Type", "application/json")
@@ -61,9 +62,9 @@ public class IniciarInstancia implements Serializable {
 					.asJson().getBody().getObject();
 			String taskId = jsonResponse.getJSONArray("data").getJSONObject(0).getString("id");
 
-			// Seteo a dgrc como responsable de la task
+			// Seteo a admin como responsable de la task
 			JSONObject body = new JSONObject()
-					.put("assignee", "dgrc");
+					.put("assignee", "admin");
 
 			Unirest.put(Constantes.host+"/activiti-rest/service/runtime/tasks/{taskId}")
 					.basicAuth(Constantes.user, Constantes.password)
@@ -98,26 +99,16 @@ public class IniciarInstancia implements Serializable {
 					.put("taskId", taskId)
 					.put("properties", properties);
 
-			logger.log(Level.INFO, body);
-
-			Unirest.post(Constantes.host+"/activiti-rest/service/form/form-data")
-					.basicAuth("admin", "test")
+			RequestBodyEntity cosa = Unirest.post(Constantes.host+"/activiti-rest/service/form/form-data")
+					.basicAuth(Constantes.user, Constantes.password)
 					.header("Content-Type", "application/json")
-					.header("accept", "application/json")
-					.body(body)
-					.asJson();
-
-			logger.log(Level.INFO, jsonResponse);
-
-			context.addMessage(null, new FacesMessage("Exito", "La movilidad " + datosPropuesta.getIdentificacion() + " se ha creado corectamente."));
+					.header("accept", "application/json")				
+					.body(body);
 
 		} catch (UnirestException e) {
-			logger.log(Level.ERROR, "Error al iniciar instancia enviando post a api-rest", e);
-			context.addMessage(null, new FacesMessage("Error", "Ocurrio un error al crear la movilidad."));
+			context.addMessage(null, new FacesMessage("Error", "Ocurrio un error al crear la propuesta."));
 			throw e;
 		}
-		// Como estoy usando sessionScope, reseteo manualmente el bean de datos movilidad, para que no aparezcan nuevamente los datos
-		// al entrar por segunda vez a la pagina.
 		datosPropuesta = new PropuestaDT();
 	}
 
