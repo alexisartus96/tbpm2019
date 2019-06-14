@@ -9,6 +9,7 @@
 
 	<name>Activiti Web</name>
 
+
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
@@ -16,6 +17,40 @@
 
 	<dependencies>
 		<!-- Servlet -->
+		
+		 <dependency>
+	        <groupId>org.hibernate.javax.persistence</groupId>
+	        <artifactId>hibernate-jpa-2.1-api</artifactId>
+	        <version>1.0.0.Final</version>
+	    </dependency>
+        <dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-core</artifactId>
+		    <version>4.3.6.Final</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-entitymanager</artifactId>
+		    <version>4.3.6.Final</version>
+		</dependency>
+         <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.2.5</version>
+        </dependency>
+        
+        
+	     <dependency>
+		    <groupId>javax.ejb</groupId>
+		    <artifactId>javax.ejb-api</artifactId>
+		    <version>3.2.1</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.jboss</groupId>
+		    <artifactId>jandex</artifactId>
+		    <version>2.0.5.Final</version>
+		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
