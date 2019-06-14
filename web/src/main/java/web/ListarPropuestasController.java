@@ -31,6 +31,10 @@ public class ListarPropuestasController implements Serializable {
 	private String user = "admin";
 	private String password = "test";
 
+	public ListarPropuestasController() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public List<PropuestaDT> getPropuestas() {
 		List<PropuestaDT> propuestas = new ArrayList<PropuestaDT>();
 
