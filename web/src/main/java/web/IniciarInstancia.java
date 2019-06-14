@@ -20,7 +20,6 @@ import org.json.JSONObject;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
-import beans.DatosMovilidadBean;
 import beans.PropuestaDT;
 import constantes.Constantes;
 
@@ -63,7 +62,7 @@ public class IniciarInstancia implements Serializable {
 
 			// Seteo a dgrc como responsable de la task
 			JSONObject body = new JSONObject()
-					.put("assignee", "dgrc");
+					.put("assignee", "admin");
 
 			Unirest.put(Constantes.host+"/activiti-rest/service/runtime/tasks/{taskId}")
 					.basicAuth(Constantes.user, Constantes.password)
@@ -112,8 +111,7 @@ public class IniciarInstancia implements Serializable {
 			context.addMessage(null, new FacesMessage("Exito", "La movilidad " + datosPropuesta.getIdentificacion() + " se ha creado corectamente."));
 
 		} catch (UnirestException e) {
-			logger.log(Level.ERROR, "Error al iniciar instancia enviando post a api-rest", e);
-			context.addMessage(null, new FacesMessage("Error", "Ocurrio un error al crear la movilidad."));
+			context.addMessage(null, new FacesMessage("Error", "Ocurrio un error al crear la propuesta."));
 			throw e;
 		}
 		// Como estoy usando sessionScope, reseteo manualmente el bean de datos movilidad, para que no aparezcan nuevamente los datos

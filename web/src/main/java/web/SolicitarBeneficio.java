@@ -40,7 +40,7 @@ public class SolicitarBeneficio implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		datosSolicitud = new SolicitudDT();
+		setDatosSolicitud(new SolicitudDT());
 	}
 
 	public void redirect(String processId) throws IOException {
@@ -112,6 +112,14 @@ public class SolicitarBeneficio implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ocurrio un error al postularse"));
 			e.printStackTrace();
 		}
+	}
+
+	public SolicitudDT getDatosSolicitud() {
+		return datosSolicitud;
+	}
+
+	public void setDatosSolicitud(SolicitudDT datosSolicitud) {
+		this.datosSolicitud = datosSolicitud;
 	}
 
 //	public DatosPostulacionBean getDatosPostulacion() {
