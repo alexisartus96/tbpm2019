@@ -29,27 +29,17 @@
 						<p:inputText id="mail" value="#{ds.mail_solicitante}" required="true" placeholder="example@server.com" />
 						
 						<p:outputLabel for="nivel_educativo" value="Nivel Educativo: " />
-						<p:selectOneMenu required="true" id="nivel_educativo" value="#{nivel_educativo}">
+						<p:selectOneMenu converter="#{nivelEducativoConverter}" required="true" id="nivel_educativo" value="#{ds.nivel_educativo}">
 
-<!-- 							<p:ajax process="@this" -->
-<!-- 								update="panelGridFormaArbitraje,panelGridCompraVentaCoinciden,panelGridCargaFrecuente,panelGridTipoCarga" -->
-<!-- 								listener="#{crearMonedaController.onCategoriaChange()}" -->
-<!-- 								event="change" /> -->
-
-							<f:selectItem itemLabel="Escuela" itemValue=""
-								noSelectionOption="true" />
+							<f:selectItem itemLabel="Escuela" itemValue="Escuela"/>
 								
-							<f:selectItem itemLabel="Secundaria incompleta" itemValue=""
-								noSelectionOption="true" />
+							<f:selectItem itemLabel="Secundaria incompleta" itemValue="Secundaria incompleta" />
 								
-							<f:selectItem itemLabel="Secundaria" itemValue=""
-								noSelectionOption="true" />
+							<f:selectItem itemLabel="Secundaria" itemValue="Secundaria"/>
 								
-							<f:selectItem itemLabel="Universitario Incompleta" itemValue=""
-								noSelectionOption="true" />
+							<f:selectItem itemLabel="Universitario Incompleta" itemValue="Universitario Incompleta"/>
 								
-							<f:selectItem itemLabel="Universitario" itemValue=""
-							noSelectionOption="true" />
+							<f:selectItem itemLabel="Universitario" itemValue="Universitario"/>
 							
 						</p:selectOneMenu>
 						
@@ -61,7 +51,7 @@
 
 					</h:panelGrid>
 
-					<p:commandButton value="Confirmar" id="confirm" actionListener="#{postularseConvocatoria.actionConfirm}" ajax="false" styleClass="ui-priority-primary" />
+					<p:commandButton value="Confirmar" id="confirm" actionListener="#{solicitarBeneficio.actionConfirm}" ajax="false" styleClass="ui-priority-primary" />
 
 				</h:form>
 			</div>

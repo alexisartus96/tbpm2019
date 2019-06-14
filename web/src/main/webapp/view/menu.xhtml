@@ -4,9 +4,9 @@
 	<h:form>
 		<p:menubar>
 			<p:menuitem value="Inicio" icon="fa fa-home" url="/" />
-			<p:menuitem value="Crear Propuesta" icon="fa fa-plus-square" url="/view/iniciar-instancia.xhtml" rendered="#{login.activeUser eq 'bps'}" />
+			<p:menuitem value="Crear Propuesta" icon="fa fa-plus-square" url="/view/iniciarPropuesta.xhtml" rendered="#{login.activeUser eq 'bps'}" />
 			<p:menuitem value="Ver Instancias" icon="fa fa-eye" url="/view/convocatoria.xhtml" rendered="#{login.activeUser eq 'beneficios'}" />
-			<p:menuitem value="Ver propuestas vigentes" icon="fa fa-eye" url="/view/convocatorias-vigentes.xhtml" />
+			<p:menuitem value="Ver propuestas vigentes" icon="fa fa-eye" url="/view/listarPropuestas.xhtml" />
 
 			<f:facet name="options">
 				<p:commandButton id="logout"  value="Salir" icon="ui-icon-extlink" actionListener="#{login.logout}" ajax="false" rendered="#{not empty login.activeUser}"/>
