@@ -7,7 +7,6 @@ import java.util.Date;
 public class PropuestaDT {
 	
 	public PropuestaDT() {
-		super();
 	}
 
 	private Long identificacion;

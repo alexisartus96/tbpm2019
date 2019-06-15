@@ -8,6 +8,8 @@
     <persistence-unit name="EmployeePU" >
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <class>persistencia.Proceso</class>
+        <class>persistencia.Solicitud</class>
+        <class>persistencia.SolicitudPK</class>
         <properties>
         
         	<property name="hibernate.connection.driver_class" value="org.postgresql.Driver" /> <!-- DB Driver -->
