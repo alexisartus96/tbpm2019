@@ -12,12 +12,13 @@
 					<h:outputText value="#{it.fecha_prevista}" />
 				</p:column>
 
+
 				<p:column headerText="Bases Llamado">
 					<h:outputText value="#{it.bases_llamado}" />
 				</p:column>
 
 				<p:column>
-					<p:commandLink id="ajax" actionListener="#{postularseConvocatoria.redirect(it.identificacion)}" rendered="#{empty login.activeUser and it.recibirSolicitud}">
+					<p:commandLink id="ajax" actionListener="#{solicitarBeneficio.redirect(it.identificacion)}" rendered="#{empty login.activeUser and it.recibirSolicitud}">
 						<h:outputText value="Postularse" />
 					</p:commandLink>
 				</p:column>
