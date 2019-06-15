@@ -3,6 +3,7 @@ package web;
 import java.io.IOException;
 import java.io.Serializable;
 
+import javax.annotation.ManagedBean;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -13,6 +14,7 @@ import javax.servlet.ServletContext;
 
 @Named
 @SessionScoped
+@ManagedBean
 public class Login extends BaseController implements Serializable {
 	private static final long serialVersionUID = -247740285157529093L;
 

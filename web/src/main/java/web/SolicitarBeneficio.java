@@ -1,5 +1,6 @@
 package web;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -7,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
@@ -20,14 +22,14 @@ import org.primefaces.model.UploadedFile;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
+import alfrescoConection.ConectorAlfresco;
+import alfrescoConection.FileUploader;
 import beans.SolicitudDT;
 import constantes.Constantes;
-//import alfrescoConection.ConectorAlfresco;
-//import alfrescoConection.FileUploader;
-import web.beans.DatosPostulacionBean;
 
 @Named
 @SessionScoped
+@ManagedBean
 public class SolicitarBeneficio implements Serializable {
 	private static final long serialVersionUID = -9118252853052412615L;
 
@@ -55,13 +57,13 @@ public class SolicitarBeneficio implements Serializable {
 
 	public void actionConfirm() throws IOException {
 		try {
-//			UploadedFile uploadedfile = datosPostulacion.getCv();
-//			String fileName = uploadedfile.getFileName();
-//			String prefix = fileName.split("\\.")[0];
-//			String suffix = fileName.split("\\.")[1];
-//			String mimeType = uploadedfile.getContentType();
-//			File file = FileUploader.stream2file(datosPostulacion.getCv().getInputstream(), prefix, suffix);
-//			String url = ConectorAlfresco.getInstance().subirArchivo(file, fileName, mimeType);
+			UploadedFile uploadedfile = datosSolicitud.getFile();
+			String fileName = uploadedfile.getFileName();
+			String prefix = fileName.split("\\.")[0];
+			String suffix = fileName.split("\\.")[1];
+			String mimeType = uploadedfile.getContentType();
+			File file = FileUploader.stream2file(uploadedfile.getInputstream(), prefix, suffix);
+			String url = ConectorAlfresco.getInstance().subirArchivo(file, fileName, mimeType);
 
 			// Obtengo la task id
 			JSONObject jsonResponse = Unirest.get(Constantes.host+"/activiti-rest/service/runtime/tasks")

@@ -41,7 +41,7 @@
 						<p:inputText id="mail" value="#{dm.mail}" required="true" placeholder="example@server.com" />
 					</h:panelGrid>
 
-					<p:commandButton value="Confirmar" id="confirm" actionListener="#{iniciarInstancia.actionConfirm}" ajax="false" styleClass="ui-priority-primary" />
+					<p:commandButton value="Confirmar" id="confirm" actionListener="#{iniciarInstancia.actionConfirm()}" ajax="false" styleClass="ui-priority-primary" />
 
 				</h:form>
 			</div>

@@ -12,6 +12,8 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
@@ -23,8 +25,8 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 import beans.PropuestaDT;
 import constantes.Constantes;
 
-@Named
-@SessionScoped
+@ManagedBean(name = "iniciarInstancia")
+@ViewScoped
 public class IniciarInstancia implements Serializable {
 
 	private static final long serialVersionUID = -4732430916973701308L;
@@ -40,7 +42,7 @@ public class IniciarInstancia implements Serializable {
 		
 	}
 	
-	public void actionConfirm(ActionEvent actionEvent) throws UnirestException {
+	public void actionConfirm() throws UnirestException {
 		FacesContext context = FacesContext.getCurrentInstance();
 		try {
 			// Inicio la instancia del proceso
