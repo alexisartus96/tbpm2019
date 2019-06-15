@@ -61,7 +61,7 @@ public class IniciarInstancia implements Serializable {
 					.asJson().getBody().getObject();
 			String taskId = jsonResponse.getJSONArray("data").getJSONObject(0).getString("id");
 
-			// Seteo a admin como responsable de la task
+			// Seteo responsable de la task
 			JSONObject body = new JSONObject()
 					.put("assignee", "admin");
 

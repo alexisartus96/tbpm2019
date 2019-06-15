@@ -46,10 +46,7 @@ public class SolicitarBeneficio implements Serializable {
 	public void redirect(String processId) throws IOException {
 		processInstanceId = processId;
 		ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-		FacesContext.getCurrentInstance().getExternalContext().redirect(servletContext.getContextPath() + "/view/postularse-convocatoria.xhtml");
-//		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-//		externalContext.redirect(externalContext.getApplicationContextPath() + "/view/postularse-convocatoria.xhtml");
-
+		FacesContext.getCurrentInstance().getExternalContext().redirect(servletContext.getContextPath() + "/view/solicitarBeneficio.xhtml");
 	}
 
 	public void handleFileUpload() {
@@ -74,15 +71,28 @@ public class SolicitarBeneficio implements Serializable {
 
 			String taskId = jsonResponse.getJSONArray("data").getJSONObject(0).getString("id");
 
+			JSONObject body = new JSONObject()
+					.put("assignee", "admin");
+
+			Unirest.put(Constantes.host+"/activiti-rest/service/runtime/tasks/{taskId}")
+					.basicAuth(Constantes.user, Constantes.password)
+					.routeParam("taskId", taskId)
+					.header("Content-Type", "application/json")
+					.body(body)
+					.asJson();
+			
 			// Hago el submit del form
 			Map<String, Object> props = new HashMap();
-//			props.put("t4_nombrePostulante", datosPostulacion.getNombre());
-//			props.put("t4_apellidoPostulante", datosPostulacion.getApellido());
-//			props.put("t4_ciPostulante", datosPostulacion.getCi());
-//			props.put("t4_carreraPostulante", datosPostulacion.getCarrera());
-//			props.put("t4_cantCreditosCarreraPostulante", datosPostulacion.getCantCreditos());
-//			props.put("t4_universidadDestinoPostulante", datosPostulacion.getUniversidad());
-//			props.put("urlCV", url);
+			props.put("ci", datosSolicitud.getIdentificacion());
+			props.put("apellido", datosSolicitud.getApellido());
+			props.put("nombre", datosSolicitud.getNombre());
+			props.put("informacion_familiar", datosSolicitud.getInformacion_familiar());
+			props.put("ingresos", datosSolicitud.getIngresos());
+			props.put("mail_solicitante", datosSolicitud.getMail_solicitante());
+			props.put("nivel_educativo", datosSolicitud.getNivel_educativo());
+			props.put("integrantes_familia", datosSolicitud.getIntegrantes_familia());
+			props.put("otros_ingresos", datosSolicitud.getOtros_ingresos());
+			//props.put("urlCV", url);
 
 			List<JSONObject> properties = new ArrayList();
 			for (Map.Entry<String, Object> e : props.entrySet()) {
@@ -93,10 +103,9 @@ public class SolicitarBeneficio implements Serializable {
 						.put("value", value));
 			}
 
-			JSONObject body = new JSONObject()
+			body = new JSONObject()
 					.put("taskId", taskId)
 					.put("properties", properties);
-
 
 			Unirest.post("http://localhost:8080/activiti-rest/service/form/form-data")
 					.basicAuth("admin", "test")
@@ -107,7 +116,7 @@ public class SolicitarBeneficio implements Serializable {
 
 
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Exito", "La postulación se ha registrado con exito."));
-//			datosPostulacion = new DatosPostulacionBean();
+			datosSolicitud = new SolicitudDT();
 		} catch (UnirestException e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ocurrio un error al postularse"));
 			e.printStackTrace();
@@ -121,12 +130,4 @@ public class SolicitarBeneficio implements Serializable {
 	public void setDatosSolicitud(SolicitudDT datosSolicitud) {
 		this.datosSolicitud = datosSolicitud;
 	}
-
-//	public DatosPostulacionBean getDatosPostulacion() {
-//		return datosPostulacion;
-//	}
-//
-//	public void setDatosPostulacion(DatosPostulacionBean datosPostulacion) {
-//		this.datosPostulacion = datosPostulacion;
-//	}
 }
