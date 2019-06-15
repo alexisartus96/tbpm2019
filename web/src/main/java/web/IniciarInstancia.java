@@ -19,7 +19,6 @@ import org.json.JSONObject;
 
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import com.mashape.unirest.request.body.RequestBodyEntity;
 
 import beans.PropuestaDT;
 import constantes.Constantes;
@@ -61,7 +60,7 @@ public class IniciarInstancia implements Serializable {
 					.asJson().getBody().getObject();
 			String taskId = jsonResponse.getJSONArray("data").getJSONObject(0).getString("id");
 
-			// Seteo a admin como responsable de la task
+			// Seteo responsable de la task
 			JSONObject body = new JSONObject()
 					.put("assignee", "admin");
 
@@ -98,16 +97,25 @@ public class IniciarInstancia implements Serializable {
 					.put("taskId", taskId)
 					.put("properties", properties);
 
-			RequestBodyEntity cosa = Unirest.post(Constantes.host+"/activiti-rest/service/form/form-data")
-					.basicAuth(Constantes.user, Constantes.password)
+			logger.log(Level.INFO, body);
+
+			Unirest.post(Constantes.host+"/activiti-rest/service/form/form-data")
+					.basicAuth("admin", "test")
 					.header("Content-Type", "application/json")
-					.header("accept", "application/json")				
-					.body(body);
+					.header("accept", "application/json")
+					.body(body)
+					.asJson();
+
+			logger.log(Level.INFO, jsonResponse);
+
+			context.addMessage(null, new FacesMessage("Exito", "La movilidad " + datosPropuesta.getIdentificacion() + " se ha creado corectamente."));
 
 		} catch (UnirestException e) {
 			context.addMessage(null, new FacesMessage("Error", "Ocurrio un error al crear la propuesta."));
 			throw e;
 		}
+		// Como estoy usando sessionScope, reseteo manualmente el bean de datos movilidad, para que no aparezcan nuevamente los datos
+		// al entrar por segunda vez a la pagina.
 		datosPropuesta = new PropuestaDT();
 	}
 

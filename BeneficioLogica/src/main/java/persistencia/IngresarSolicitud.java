@@ -24,14 +24,26 @@ public class IngresarSolicitud implements TaskListener{
 		Solicitud solicitud= new Solicitud();
 		SolicitudPK soliPK = new SolicitudPK();
 		try {
-			soliPK.setCi((Long) variables.get("ci"));
+			if(variables.get("ci") instanceof Long) {
+				soliPK.setCi((Long)variables.get("ci"));
+			}else if(variables.get("ci") instanceof Integer) {
+				soliPK.setCi((Integer)variables.get("ci"));
+			}else if(variables.get("ci") instanceof String) {
+				soliPK.setCi(new Long((String)variables.get("ci")));
+			}
 		}catch(Exception e) {
-			soliPK.setCi((Integer) variables.get("ci"));
+			e.printStackTrace();
 		}
 		try {
-			soliPK.setIdProceso((Long) variables.get("identificacion"));
+			if(variables.get("identificacion") instanceof Long) {
+				soliPK.setIdProceso((Long)variables.get("identificacion"));
+			}else if(variables.get("identificacion") instanceof Integer) {
+				soliPK.setIdProceso((Integer)variables.get("identificacion"));
+			}else if(variables.get("identificacion") instanceof String) {
+				soliPK.setIdProceso(new Long((String)variables.get("identificacion")));
+			}
 		}catch(Exception e) {
-			soliPK.setCi((Integer) variables.get("identificacion"));
+			e.printStackTrace();
 		}
 		solicitud.setId(soliPK);
 		
@@ -39,22 +51,40 @@ public class IngresarSolicitud implements TaskListener{
 		solicitud.setDatosFamiliares((String) variables.get("informacion_familiar"));
 		
 		try {
-			solicitud.setIngresos((Long) variables.get("ingresos"));
+			if(variables.get("ingresos") instanceof Long) {
+				solicitud.setIngresos((Long)variables.get("ingresos"));
+			}else if(variables.get("ingresos") instanceof Integer) {
+				solicitud.setIngresos((Integer)variables.get("ingresos"));
+			}else if(variables.get("ingresos") instanceof String) {
+				solicitud.setIngresos(new Long((String)variables.get("ingresos")));
+			}
 		}catch(Exception e) {
-			solicitud.setIngresos((Integer) variables.get("ingresos"));
+			e.printStackTrace();
 		}
 		solicitud.setMailSolicitante((String)variables.get("mail_solicitante"));
 		solicitud.setNombre((String)variables.get("nombre"));
 		solicitud.setNivelEducativo((String) variables.get("nivel_educativo"));
 		try {
-			solicitud.setIntegrantesFamilia((Long) variables.get("integrantes_familia"));
+			if(variables.get("integrantes_familia") instanceof Long) {
+				solicitud.setIntegrantesFamilia((Long)variables.get("integrantes_familia"));
+			}else if(variables.get("integrantes_familia") instanceof Integer) {
+				solicitud.setIntegrantesFamilia((Integer)variables.get("integrantes_familia"));
+			}else if(variables.get("integrantes_familia") instanceof String) {
+				solicitud.setIntegrantesFamilia(new Long((String)variables.get("integrantes_familia")));
+			}
 		}catch(Exception e) {
-			solicitud.setIntegrantesFamilia((Integer) variables.get("integrantes_familia"));
+			e.printStackTrace();
 		}
 		try {
-			solicitud.setOtrosIngresos((Long) variables.get("otros_ingresos"));
+			if(variables.get("otros_ingresos") instanceof Long) {
+				solicitud.setOtrosIngresos((Long)variables.get("otros_ingresos"));
+			}else if(variables.get("otros_ingresos") instanceof Integer) {
+				solicitud.setOtrosIngresos((Integer)variables.get("otros_ingresos"));
+			}else if(variables.get("otros_ingresos") instanceof String) {
+				solicitud.setOtrosIngresos(new Long((String)variables.get("otros_ingresos")));
+			}
 		}catch(Exception e) {
-			solicitud.setOtrosIngresos((Integer) variables.get("otros_ingresos"));
+			e.printStackTrace();
 		}
 		if(((String)delegateTask.getTaskDefinitionKey()).compareTo("ingresar_solicitud")==0 || ((String)delegateTask.getTaskDefinitionKey()).compareTo("Recibir_info_faltante")==0) {
 			solicitud.setValidado(true);
