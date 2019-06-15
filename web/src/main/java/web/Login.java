@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Serializable;
 
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.ServletContext;
@@ -12,7 +13,7 @@ import javax.servlet.ServletContext;
 
 @Named
 @SessionScoped
-public class Login implements Serializable {
+public class Login extends BaseController implements Serializable {
 	private static final long serialVersionUID = -247740285157529093L;
 
 	private String user;
@@ -21,12 +22,19 @@ public class Login implements Serializable {
 	private Boolean bps;
 
 	public void login() throws IOException {
-		if (user.contentEquals("bps") && password.contentEquals("12345")) {
-			activeUser="bps";
-		} else if (user.contentEquals("beneficios") && password.contentEquals("12345")) {
-			activeUser="beneficios";
+//		if (user.contentEquals("bps") && password.contentEquals("12345")) {
+//			activeUser="bps";
+//		} else if (user.contentEquals("beneficios") && password.contentEquals("12345")) {
+//			activeUser="beneficios";
+//		}
+//		activeUser=user;
+		System.out.println("hola");
+		Boolean login=(new LoginUsr()).loguin(user, password);
+		if(login) {
+			activeUser=user;
+		}else {
+			errorMessage("Credenciales Invalidas.");
 		}
-		activeUser=user;
 	}
 
 	public void logout() throws IOException {

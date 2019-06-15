@@ -1,20 +1,20 @@
 package web;
 
+import java.awt.event.ActionEvent;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 import javax.inject.Named;
 
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
 import org.json.JSONObject;
 
 import com.mashape.unirest.http.Unirest;
@@ -26,7 +26,6 @@ import constantes.Constantes;
 @Named
 @SessionScoped
 public class IniciarInstancia implements Serializable {
-	private static final Logger logger = Logger.getLogger(IniciarInstancia.class);
 
 	private static final long serialVersionUID = -4732430916973701308L;
 
@@ -34,12 +33,14 @@ public class IniciarInstancia implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		logger.log(Level.INFO, "Init");
 		datosPropuesta = new PropuestaDT();
 	}
-
+	
+	public IniciarInstancia(){
+		
+	}
+	
 	public void actionConfirm(ActionEvent actionEvent) throws UnirestException {
-		logger.log(Level.INFO, "Action confirm");
 		FacesContext context = FacesContext.getCurrentInstance();
 		try {
 			// Inicio la instancia del proceso
@@ -97,25 +98,17 @@ public class IniciarInstancia implements Serializable {
 					.put("taskId", taskId)
 					.put("properties", properties);
 
-			logger.log(Level.INFO, body);
-
 			Unirest.post(Constantes.host+"/activiti-rest/service/form/form-data")
-					.basicAuth("admin", "test")
+					.basicAuth(Constantes.user, Constantes.password)
 					.header("Content-Type", "application/json")
-					.header("accept", "application/json")
+					.header("accept", "application/json")				
 					.body(body)
 					.asJson();
-
-			logger.log(Level.INFO, jsonResponse);
-
-			context.addMessage(null, new FacesMessage("Exito", "La movilidad " + datosPropuesta.getIdentificacion() + " se ha creado corectamente."));
 
 		} catch (UnirestException e) {
 			context.addMessage(null, new FacesMessage("Error", "Ocurrio un error al crear la propuesta."));
 			throw e;
 		}
-		// Como estoy usando sessionScope, reseteo manualmente el bean de datos movilidad, para que no aparezcan nuevamente los datos
-		// al entrar por segunda vez a la pagina.
 		datosPropuesta = new PropuestaDT();
 	}
 

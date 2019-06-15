@@ -2,7 +2,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
-	<link type="text/css" rel="stylesheet" href="../css/main.css"/>
+	<link type="text/css" rel="stylesheet" href="css/main.css"/>
 </h:head>
 
 <h:body>
@@ -11,5 +11,28 @@
 	</ui:insert>
 	
 	<ui:insert name="content"/>
+	<div id="content" class="container bs-docs-container" >
+			<div class="contenido">
+				<div class="row">
+					<div class="messageContainer" id="messageContainer">
+						<div class="row">
+							<p:growl id="growl-error" showDetail="false"
+								severity="error" life="10000" escape="false"/>
+						</div>
+	
+						<div class="row">
+							<p:growl id="growl-success" showDetail="false"
+								severity="info" life="10000" escape="false"/>
+						</div>
+						
+						<div class="row">
+							<p:growl id="growl-warning" showDetail="false"
+								severity="warning" life="10000" escape="false"/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	<p:growl id="growl" showDetail="true" sticky="true"/> 
 </h:body>
 </html>
