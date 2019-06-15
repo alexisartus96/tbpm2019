@@ -24,7 +24,17 @@ public class CorregirLista implements ExecutionListener{
 		EntityTransaction et= em.getTransaction();
 		et.begin();
 		Query q = em.createNamedQuery("Solicitud.ByProcesoIdOrderPrioridad");
-		q.setParameter("idProceso", execution.getVariable("identificacion"));
+		try {
+			if(execution.getVariable("identificacion") instanceof Long) {
+				q.setParameter("idProceso",(Long)execution.getVariable("identificacion"));
+			}else if(execution.getVariable("identificacion") instanceof Integer) {
+				q.setParameter("idProceso",(Integer)execution.getVariable("identificacion"));
+			}else if(execution.getVariable("identificacion") instanceof String) {
+				q.setParameter("idProceso",new Long((String)execution.getVariable("identificacion")));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		List<Solicitud> solicitudes= (List<Solicitud>) q.getResultList();
 		et.commit();
 		

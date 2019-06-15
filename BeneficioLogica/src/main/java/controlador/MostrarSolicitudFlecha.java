@@ -22,7 +22,17 @@ public class MostrarSolicitudFlecha implements ExecutionListener{
 		
 		
 		q.setParameter("ci", new Long((String) execution.getVariable("solicitud")));
-		q.setParameter("idProceso", execution.getVariable("identificacion"));
+		try {
+			if(execution.getVariable("identificacion") instanceof Long) {
+				q.setParameter("idProceso",(Long)execution.getVariable("identificacion"));
+			}else if(execution.getVariable("identificacion") instanceof Integer) {
+				q.setParameter("idProceso",(Integer)execution.getVariable("identificacion"));
+			}else if(execution.getVariable("identificacion") instanceof String) {
+				q.setParameter("idProceso",new Long((String)execution.getVariable("identificacion")));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 		EntityTransaction et= em.getTransaction();
 		et.begin();

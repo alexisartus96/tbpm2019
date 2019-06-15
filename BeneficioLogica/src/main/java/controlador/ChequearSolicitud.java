@@ -27,7 +27,17 @@ public class ChequearSolicitud implements TaskListener{
 //		Query q = em.createQuery("SELECT Solicitud FROM solicitud WHERE solicitud.id.ci='"+execution.getVariable("identificacion")+"'");
 		Query q = em.createNamedQuery("Solicitud.byId");
 		q.setParameter("ci", delegateTask.getVariable("solicitud"));
-		q.setParameter("idProceso", delegateTask.getVariable("identificacion"));
+		try {
+			if(delegateTask.getVariable("identificacion") instanceof Long) {
+				q.setParameter("idProceso",(Long)delegateTask.getVariable("identificacion"));
+			}else if(delegateTask.getVariable("identificacion") instanceof Integer) {
+				q.setParameter("idProceso",(Integer)delegateTask.getVariable("identificacion"));
+			}else if(delegateTask.getVariable("identificacion") instanceof String) {
+				q.setParameter("idProceso",new Long((String)delegateTask.getVariable("identificacion")));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		Solicitud solicitud= (Solicitud) q.getSingleResult();
 		
 //		ArrayList<Solicitud> solicitudes= (ArrayList<Solicitud>) q.getResultList();

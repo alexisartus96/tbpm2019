@@ -26,7 +26,17 @@ public class EvaluarSolicitud implements TaskListener{
 //		Query q = em.createQuery("SELECT Solicitud FROM solicitud WHERE solicitud.id.ci='"+execution.getVariable("identificacion")+"'");
 		Query q = em.createNamedQuery("Solicitud.byId");
 		q.setParameter("ci", new Long((String)delegateTask.getVariable("solicitud")));
-		q.setParameter("idProceso", delegateTask.getVariable("identificacion"));
+		try {
+			if(delegateTask.getVariable("identificacion") instanceof Long) {
+				q.setParameter("idProceso",(Long)delegateTask.getVariable("identificacion"));
+			}else if(delegateTask.getVariable("identificacion") instanceof Integer) {
+				q.setParameter("idProceso",(Integer)delegateTask.getVariable("identificacion"));
+			}else if(delegateTask.getVariable("identificacion") instanceof String) {
+				q.setParameter("idProceso",new Long((String)delegateTask.getVariable("identificacion")));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		Solicitud solicitud= (Solicitud) q.getSingleResult();
 		
 		solicitud.setValidado((Boolean) delegateTask.getVariable("solicitud_valida"));

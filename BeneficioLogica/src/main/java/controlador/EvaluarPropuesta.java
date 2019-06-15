@@ -27,7 +27,17 @@ public class EvaluarPropuesta implements ExecutionListener{
 		et.begin();
 //		Query q = em.createQuery("SELECT Solicitud FROM solicitud WHERE solicitud.id.ci='"+execution.getVariable("identificacion")+"'");
 		Query q = em.createNamedQuery("Solicitud.ValidadasByProcesoId");
-		q.setParameter("idProceso", execution.getVariable("identificacion"));		
+		try {
+			if(execution.getVariable("identificacion") instanceof Long) {
+				q.setParameter("idProceso",(Long)execution.getVariable("identificacion"));
+			}else if(execution.getVariable("identificacion") instanceof Integer) {
+				q.setParameter("idProceso",(Integer)execution.getVariable("identificacion"));
+			}else if(execution.getVariable("identificacion") instanceof String) {
+				q.setParameter("idProceso",new Long((String)execution.getVariable("identificacion")));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}	
 		ArrayList<Solicitud> solicitudes= (ArrayList<Solicitud>) q.getResultList();
 //		EntityTransaction et2= em.getTransaction();
 //		et2.begin();
@@ -38,13 +48,56 @@ public class EvaluarPropuesta implements ExecutionListener{
 		
 		int montoSuma = 0;
 		int montoAux = 0;
-		int montoTotal;
-		int alto;
-		int medio;
-		int bajo;
+		int montoTotal = 0;
+		int alto = 0;
+		int medio = 0;
+		int bajo = 0;
 		Boolean montoAlcanzado=false;
-		
 		try {
+			if(execution.getVariable("alto") instanceof Long) {
+				alto= Integer.parseInt(Long.toString((Long) execution.getVariable("alto")));
+			}else if(execution.getVariable("alto") instanceof Integer) {
+				alto= (Integer) execution.getVariable("alto");
+			}else if(execution.getVariable("alto") instanceof String) {
+				alto= Integer.parseInt((String) execution.getVariable("alto"));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}	
+		try {
+			if(execution.getVariable("medio") instanceof Long) {
+				alto= Integer.parseInt(Long.toString((Long) execution.getVariable("medio")));
+			}else if(execution.getVariable("medio") instanceof Integer) {
+				alto= (Integer) execution.getVariable("medio");
+			}else if(execution.getVariable("medio") instanceof String) {
+				alto= Integer.parseInt((String) execution.getVariable("medio"));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}	
+		try {
+			if(execution.getVariable("bajo") instanceof Long) {
+				alto= Integer.parseInt(Long.toString((Long) execution.getVariable("bajo")));
+			}else if(execution.getVariable("bajo") instanceof Integer) {
+				alto= (Integer) execution.getVariable("bajo");
+			}else if(execution.getVariable("bajo") instanceof String) {
+				alto= Integer.parseInt((String) execution.getVariable("bajo"));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}	
+		try {
+			if(execution.getVariable("monto_total") instanceof Long) {
+				alto= Integer.parseInt(Long.toString((Long) execution.getVariable("monto_total")));
+			}else if(execution.getVariable("monto_total") instanceof Integer) {
+				alto= (Integer) execution.getVariable("monto_total");
+			}else if(execution.getVariable("monto_total") instanceof String) {
+				alto= Integer.parseInt((String) execution.getVariable("monto_total"));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}	
+		/*try {
 			alto= Integer.parseInt(Long.toString((Long) execution.getVariable("alto")));
 		} catch (Exception e) {
 			alto= (Integer) execution.getVariable("alto");
@@ -63,7 +116,7 @@ public class EvaluarPropuesta implements ExecutionListener{
 			montoTotal= Integer.parseInt(Long.toString((Long) execution.getVariable("monto_total")));
 		} catch (Exception e) {
 			montoTotal= (Integer) execution.getVariable("monto_total");
-		}
+		}*/
 		
 		for (Solicitud solicitud : solicitudes) {
 			if(solicitud.getRangoSubsidio().compareTo("Alto")==0) {

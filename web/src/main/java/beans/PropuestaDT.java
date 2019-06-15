@@ -9,7 +9,7 @@ public class PropuestaDT {
 	public PropuestaDT() {
 	}
 
-	private Long identificacion;
+	private String identificacion;
 	private LocalDate fecha_prevista;
 	private Date fecha_prevista_date;
 	private String bases_llamado;
@@ -22,10 +22,10 @@ public class PropuestaDT {
 	private String mail;
 	private Boolean recibirSolicitud;
 	
-	public Long getIdentificacion() {
+	public String getIdentificacion() {
 		return identificacion;
 	}
-	public void setIdentificacion(Long identificacion) {
+	public void setIdentificacion(String identificacion) {
 		this.identificacion = identificacion;
 	}
 	public LocalDate getFecha_prevista() {

@@ -24,7 +24,7 @@ import constantes.Constantes;
 
 @Named
 @SessionScoped
-public class ListarPropuestasController implements Serializable {
+public class ListarPropuestasController extends BaseController implements Serializable {
 	private static final long serialVersionUID = -6931979465784683151L;
 	private static final Logger logger = Logger.getLogger(ListarPropuestasController.class);
 
@@ -71,14 +71,14 @@ public class ListarPropuestasController implements Serializable {
 					PropuestaDT propuesta = new PropuestaDT();
 					SimpleDateFormat df= new SimpleDateFormat("yyyy-MM-dd");
 					propuesta.setFecha_prevista_date(df.parse(fecha_prevista));
-					propuesta.setIdentificacion(Long.valueOf(numero));
+					propuesta.setIdentificacion(numero);
 					propuesta.setBases_llamado(bases_llamado);
 					propuesta.setRecibirSolicitud(recibirSolicitud);
 					propuestas.add(propuesta);
 				}
 			}
 		} catch (Exception e) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error", "Ocurrio un error al obtener las convocatorias vigentes."));
+			errorMessage("Ocurrio un error al obtener las propuestas vigentes.");
 			e.printStackTrace();
 		}
 		

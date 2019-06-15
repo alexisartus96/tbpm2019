@@ -26,7 +26,17 @@ public class MostrarSolicitud implements TaskListener{
 		
 		
 		q.setParameter("ci", new Long((String) delegateTask.getVariable("solicitud")));
-		q.setParameter("idProceso", delegateTask.getVariable("identificacion"));
+		try {
+			if(delegateTask.getVariable("identificacion") instanceof Long) {
+				q.setParameter("idProceso",(Long)delegateTask.getVariable("identificacion"));
+			}else if(delegateTask.getVariable("identificacion") instanceof Integer) {
+				q.setParameter("idProceso",(Integer)delegateTask.getVariable("identificacion"));
+			}else if(delegateTask.getVariable("identificacion") instanceof String) {
+				q.setParameter("idProceso",new Long((String)delegateTask.getVariable("identificacion")));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 		EntityTransaction et= em.getTransaction();
 		et.begin();

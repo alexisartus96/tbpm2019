@@ -25,7 +25,17 @@ public class ArmarListaSolicitudInvalida implements ExecutionListener{
 		et.begin();
 //		Query q = em.createQuery("SELECT Solicitud FROM solicitud WHERE solicitud.id.ci='"+execution.getVariable("identificacion")+"'");
 		Query q = em.createNamedQuery("Solicitud.ByProcesoIdOrderPrioridad");
-		q.setParameter("idProceso", execution.getVariable("identificacion"));
+		try {
+			if(execution.getVariable("identificacion") instanceof Long) {
+				q.setParameter("idProceso",(Long)execution.getVariable("identificacion"));
+			}else if(execution.getVariable("identificacion") instanceof Integer) {
+				q.setParameter("idProceso",(Integer)execution.getVariable("identificacion"));
+			}else if(execution.getVariable("identificacion") instanceof String) {
+				q.setParameter("idProceso",new Long((String)execution.getVariable("identificacion")));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		ArrayList<Solicitud> solicitudes= (ArrayList<Solicitud>) q.getResultList();
 		
 		ArrayList<String> list_solicitudes_invalidas=new ArrayList<String>();

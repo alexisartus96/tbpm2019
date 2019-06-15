@@ -28,7 +28,17 @@ public class RecibirInfoFaltante implements TaskListener{
 		
 		Query q = em.createNamedQuery("Solicitud.byId");
 		q.setParameter("ci", execution.getVariable("solicitud_invalida"));
-		q.setParameter("idProceso", execution.getVariable("identificacion"));
+		try {
+			if(execution.getVariable("identificacion") instanceof Long) {
+				q.setParameter("idProceso",(Long)execution.getVariable("identificacion"));
+			}else if(execution.getVariable("identificacion") instanceof Integer) {
+				q.setParameter("idProceso",(Integer)execution.getVariable("identificacion"));
+			}else if(execution.getVariable("identificacion") instanceof String) {
+				q.setParameter("idProceso",new Long((String)execution.getVariable("identificacion")));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 		Solicitud solicitud= (Solicitud) q.getSingleResult();
 		
