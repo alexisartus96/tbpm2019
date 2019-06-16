@@ -2,6 +2,8 @@ package persistencia;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.swing.text.StyledEditorKit.BoldAction;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -48,6 +50,17 @@ public class Proceso implements Serializable {
 
 	@Column(name="monto_total")
 	private Long montoTotal;
+	
+	@Column(name="finalizado")
+	private Boolean finalizado;
+
+	public Boolean getFinalizado() {
+		return finalizado;
+	}
+
+	public void setFinalizado(Boolean finalizado) {
+		this.finalizado = finalizado;
+	}
 
 	public Proceso() {
 	}

@@ -56,7 +56,7 @@ public class ListarPropuestasController extends BaseController implements Serial
 
 				Map<String, String> variables = parseVariables(process.getJSONArray("variables"));
 
-				if (variables.containsKey("propuesta_validada") && variables.get("propuesta_validada").equals("true")) {
+				if (variables.containsKey("propuesta_aprobada") && variables.get("propuesta_aprobada").equals("true")) {
 					
 					String fecha_prevista = variables.get("fecha_prevista_string");
 					String bases_llamado = variables.get("bases_llamado");
