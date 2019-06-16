@@ -9,7 +9,7 @@
 			<p:menuitem value="Ver propuestas vigentes" icon="fa fa-eye" url="/view/listarPropuestas.xhtml" />
 
 			<f:facet name="options">
-				<p:commandButton id="logout"  value="Salir" icon="ui-icon-extlink" actionListener="#{login.logout}" ajax="false" rendered="#{not empty login.activeUser}"/>
+				<p:commandButton id="logout"  value="Salir" icon="ui-icon-extlink" actionListener="#{login.logout()}" ajax="false" rendered="#{not empty login.activeUser}"/>
 			</f:facet>
 		</p:menubar>
 	</h:form>
