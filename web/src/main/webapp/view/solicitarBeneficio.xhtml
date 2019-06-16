@@ -8,28 +8,27 @@
 				<h:form enctype="multipart/form-data">
 					<p:growl id="growl" showDetail="true" sticky="true" />
 
-					<ui:param name="ds" value="#{solicitarBeneficio.datosSolicitud}" />
 					<h:panelGrid columns="2" columnClasses="label, value">
 						<p:outputLabel for="ci" value="CI:" />
-						<p:inputNumber id="ci" value="#{ds.identificacion}" required="true" />
+						<p:inputNumber id="ci" value="#{solicitarBeneficio.datosSolicitud.identificacion}" required="true" />
 					
 						<p:outputLabel for="nombre" value="Nombre:" />
-						<p:inputText id="nombre" value="#{ds.nombre}" required="true" />
+						<p:inputText id="nombre" value="#{solicitarBeneficio.datosSolicitud.nombre}" required="true" />
 
 						<p:outputLabel for="apellido" value="Apellido:" />
-						<p:inputText id="apellido" value="#{ds.apellido}" required="true" />
+						<p:inputText id="apellido" value="#{solicitarBeneficio.datosSolicitud.apellido}" required="true" />
 
 						<p:outputLabel for="info_familiar" value="Información Familiar: " />
-						<p:inputTextarea id="info_familiar" value="#{ds.informacion_familiar}" required="true" />
+						<p:inputTextarea id="info_familiar" value="#{solicitarBeneficio.datosSolicitud.informacion_familiar}" required="true" />
 						
 						<p:outputLabel for="ingresos" value="Ingresos: " />
-						<p:inputNumber id="ingresos" value="#{ds.ingresos}" required="true" />
+						<p:inputNumber id="ingresos" value="#{solicitarBeneficio.datosSolicitud.ingresos}" required="true" />
 						
 						<p:outputLabel for="mail" value="Mail" />
-						<p:inputText id="mail" value="#{ds.mail_solicitante}" required="true" placeholder="example@server.com" />
+						<p:inputText id="mail" value="#{solicitarBeneficio.datosSolicitud.mail_solicitante}" required="true" placeholder="example@server.com" />
 						
 						<p:outputLabel for="nivel_educativo" value="Nivel Educativo: " />
-						<p:selectOneMenu converter="#{nivelEducativoConverter}" required="true" id="nivel_educativo" value="#{ds.nivel_educativo}">
+						<p:selectOneMenu converter="#{nivelEducativoConverter}" required="true" id="nivel_educativo" value="#{solicitarBeneficio.datosSolicitud.nivel_educativo}">
 
 							<f:selectItem itemLabel="Escuela" itemValue="Escuela"/>
 								
@@ -44,14 +43,17 @@
 						</p:selectOneMenu>
 						
 							<p:outputLabel for="integrantes_familia" value="Integrantes Familia: " />
-							<p:inputText id="integrantes_familia" value="#{ds.integrantes_familia}" required="true" />
+							<p:inputText id="integrantes_familia" value="#{solicitarBeneficio.datosSolicitud.integrantes_familia}" required="true" />
 						
 							<p:outputLabel for="otros_ingresos" value="Otros Ingresos: " />
-							<p:inputNumber id="otros_ingresos" value="#{ds.otros_ingresos}" required="true" />
+							<p:inputNumber id="otros_ingresos" value="#{solicitarBeneficio.datosSolicitud.otros_ingresos}" required="true" />
+							
+						<p:outputLabel for="file" value="file con la escolaridad correspodiente: " />
+						<p:fileUpload id="file" value="#{solicitarBeneficio.datosSolicitud.file}" mode="simple" skinSimple="true"/>
 
 					</h:panelGrid>
 
-					<p:commandButton value="Confirmar" id="confirm" actionListener="#{solicitarBeneficio.actionConfirm}" ajax="false" styleClass="ui-priority-primary" />
+					<p:commandButton value="Confirmar" id="confirm" actionListener="#{solicitarBeneficio.actionConfirm()}" ajax="false" styleClass="ui-priority-primary" />
 
 				</h:form>
 			</div>

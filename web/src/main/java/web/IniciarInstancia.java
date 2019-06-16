@@ -119,5 +119,4 @@ public class IniciarInstancia implements Serializable {
 	public void setDatosMovilidad(PropuestaDT datosPropuesta) {
 		this.datosPropuesta = datosPropuesta;
 	}
-
 }

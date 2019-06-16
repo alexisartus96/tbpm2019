@@ -16,7 +16,7 @@
 					<p:password id="password" value="#{login.password}" required="true" label="password" />
 
 					<f:facet name="footer">
-						<p:commandButton value="Login" actionListener="#{login.login}" ajax="false"/>
+						<p:commandButton value="Login" actionListener="#{login.login()}" ajax="false"/>
 					</f:facet>
 				</h:panelGrid>
 			</div>
