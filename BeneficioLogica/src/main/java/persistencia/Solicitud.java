@@ -52,6 +52,8 @@ public class Solicitud implements Serializable {
 	@Column(name="nivel_educativo")
 	private String nivelEducativo;
 
+	private String url_doc;
+	
 	private String nombre;
 
 	@Column(name="otros_ingresos")
@@ -187,6 +189,14 @@ public class Solicitud implements Serializable {
 
 	public void setConfirmado(Boolean confirmado) {
 		this.confirmado = confirmado;
+	}
+
+	public String getUrl_doc() {
+		return url_doc;
+	}
+
+	public void setUrl_doc(String url_doc) {
+		this.url_doc = url_doc;
 	}
 	
 

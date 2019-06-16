@@ -94,7 +94,8 @@ public class SolicitarBeneficio implements Serializable {
 			props.put("nivel_educativo", datosSolicitud.getNivel_educativo());
 			props.put("integrantes_familia", datosSolicitud.getIntegrantes_familia());
 			props.put("otros_ingresos", datosSolicitud.getOtros_ingresos());
-			//props.put("urlCV", url);
+			props.put("url_datos_solicitante", "127.0.0.1:8080/share/proxy/alfresco/slingshot/node/content/workspace/SpacesStore/"+
+						Constantes.alfrescofolderID + fileName);
 
 			List<JSONObject> properties = new ArrayList();
 			for (Map.Entry<String, Object> e : props.entrySet()) {
@@ -109,7 +110,7 @@ public class SolicitarBeneficio implements Serializable {
 					.put("taskId", taskId)
 					.put("properties", properties);
 
-			Unirest.post("http://localhost:8080/activiti-rest/service/form/form-data")
+			Unirest.post("http://localhost:8082/activiti-rest/service/form/form-data")
 					.basicAuth("admin", "test")
 					.header("Content-Type", "application/json")
 					.header("accept", "application/json")

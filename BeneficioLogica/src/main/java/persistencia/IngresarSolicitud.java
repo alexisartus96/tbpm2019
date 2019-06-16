@@ -49,6 +49,8 @@ public class IngresarSolicitud implements TaskListener{
 		
 		solicitud.setApellido((String) variables.get("apellido"));
 		solicitud.setDatosFamiliares((String) variables.get("informacion_familiar"));
+
+		if(variables.get("url_datos_solicitante")!=null) solicitud.setUrl_doc((String)(variables.get("url_datos_solicitante")));
 		
 		try {
 			if(variables.get("ingresos") instanceof Long) {

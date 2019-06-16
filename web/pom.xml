@@ -145,7 +145,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.tbpm</groupId>
-			<artifactId>logica</artifactId>
+			<artifactId>alfresco</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 

@@ -1,5 +1,7 @@
 package beans;
 
+import org.primefaces.model.UploadedFile;
+
 public class SolicitudDT {
 	
 	public SolicitudDT() {
@@ -16,6 +18,8 @@ public class SolicitudDT {
 	private String integrantes_familia;
 	private Long otros_ingresos;
 	private Boolean solicitud_valida;
+
+	private UploadedFile file;
 	
 	
 	public Long getIdentificacion() {
@@ -77,6 +81,13 @@ public class SolicitudDT {
 	}
 	public void setSolicitud_valida(Boolean solicitud_valida) {
 		this.solicitud_valida = solicitud_valida;
+	}
+
+	public UploadedFile getFile() {
+		return file;
+	}
+	public void setFile(UploadedFile file) {
+		this.file = file;
 	}
 	
 	
