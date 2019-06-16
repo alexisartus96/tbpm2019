@@ -66,33 +66,33 @@ public class EvaluarPropuesta implements ExecutionListener{
 		}	
 		try {
 			if(execution.getVariable("medio") instanceof Long) {
-				alto= Integer.parseInt(Long.toString((Long) execution.getVariable("medio")));
+				medio= Integer.parseInt(Long.toString((Long) execution.getVariable("medio")));
 			}else if(execution.getVariable("medio") instanceof Integer) {
-				alto= (Integer) execution.getVariable("medio");
+				medio= (Integer) execution.getVariable("medio");
 			}else if(execution.getVariable("medio") instanceof String) {
-				alto= Integer.parseInt((String) execution.getVariable("medio"));
+				medio= Integer.parseInt((String) execution.getVariable("medio"));
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}	
 		try {
 			if(execution.getVariable("bajo") instanceof Long) {
-				alto= Integer.parseInt(Long.toString((Long) execution.getVariable("bajo")));
+				bajo= Integer.parseInt(Long.toString((Long) execution.getVariable("bajo")));
 			}else if(execution.getVariable("bajo") instanceof Integer) {
-				alto= (Integer) execution.getVariable("bajo");
+				bajo= (Integer) execution.getVariable("bajo");
 			}else if(execution.getVariable("bajo") instanceof String) {
-				alto= Integer.parseInt((String) execution.getVariable("bajo"));
+				bajo= Integer.parseInt((String) execution.getVariable("bajo"));
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}	
 		try {
 			if(execution.getVariable("monto_total") instanceof Long) {
-				alto= Integer.parseInt(Long.toString((Long) execution.getVariable("monto_total")));
+				montoTotal= Integer.parseInt(Long.toString((Long) execution.getVariable("monto_total")));
 			}else if(execution.getVariable("monto_total") instanceof Integer) {
-				alto= (Integer) execution.getVariable("monto_total");
+				montoTotal= (Integer) execution.getVariable("monto_total");
 			}else if(execution.getVariable("monto_total") instanceof String) {
-				alto= Integer.parseInt((String) execution.getVariable("monto_total"));
+				montoTotal= Integer.parseInt((String) execution.getVariable("monto_total"));
 			}
 		}catch(Exception e) {
 			e.printStackTrace();

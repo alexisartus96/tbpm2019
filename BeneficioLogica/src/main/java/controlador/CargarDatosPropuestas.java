@@ -61,7 +61,7 @@ public class CargarDatosPropuestas implements ExecutionListener {
 				.put("includeProcessVariables", "true");
 		Boolean existePropuesta = false;
 		try {
-			JSONObject jsonResponse = Unirest.post("http://localhost:8080/activiti-rest/service/query/process-instances")
+			JSONObject jsonResponse = Unirest.post("http://localhost:8082/activiti-rest/service/query/process-instances")
 					.basicAuth("admin", "test")
 					.header("Content-Type", "application/json")
 					.body(body)

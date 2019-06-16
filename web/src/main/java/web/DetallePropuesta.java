@@ -17,28 +17,27 @@ import org.json.JSONObject;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
-import beans.ActividadBean;
-import constantes.Constantes;
+import dt.ActividadDT;
 
 @Named
 @SessionScoped
-public class Convocatoria implements Serializable {
-	private static final Logger logger = Logger.getLogger(Convocatoria.class);
+public class DetallePropuesta implements Serializable {
+	private static final Logger logger = Logger.getLogger(DetallePropuesta.class);
 
 	private String user = "admin";
 	private String password = "test";
 	private String processInstanceId;
-	List<ActividadBean> actividadesList = null;
+	List<ActividadDT> actividadesList = null;
 
 	public void loadActividades() {
-		actividadesList = new ArrayList<ActividadBean>();
+		actividadesList = new ArrayList<>();
 
 		if (processInstanceId == null) {
 			return;
 		}
 		
 		try {
-			JSONObject jsonResponse = Unirest.get(Constantes.host+"/activiti-rest/service/history/historic-task-instances")
+			JSONObject jsonResponse = Unirest.get("http://localhost:8082/activiti-rest/service/history/historic-task-instances")
 					.basicAuth(user, password)
 					.queryString("processInstanceId", processInstanceId)
 					.asJson().getBody().getObject();
@@ -47,7 +46,7 @@ public class Convocatoria implements Serializable {
 
 			for (int i = 0; i < actividades.length(); i++) {
 				JSONObject actividad = actividades.getJSONObject(i);
-				ActividadBean actividadBean = new ActividadBean();
+				ActividadDT actividadBean = new ActividadDT();
 
 				actividadBean.setNombre(actividad.get("name"));
 				actividadBean.setFechaComienzo(actividad.get("startTime"));
@@ -77,11 +76,11 @@ public class Convocatoria implements Serializable {
 	}
 
 
-	public List<ActividadBean> getActividadesList() {
+	public List<ActividadDT> getActividadesList() {
 		return actividadesList;
 	}
 
-	public void setActividadesList(List<ActividadBean> actividadesList) {
+	public void setActividadesList(List<ActividadDT> actividadesList) {
 		this.actividadesList = actividadesList;
 	}
 

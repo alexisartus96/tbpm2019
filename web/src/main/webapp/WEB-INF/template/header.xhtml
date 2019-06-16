@@ -1,0 +1,277 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<script>
+	function logOut(){		
+		$('#popUpLogOut').modal({ backdrop: 'static', keyboard: false });
+	};
+	function confirmarAbrirDia(){
+		$('#popUpAbrirDia').modal({ backdrop: 'static', keyboard: false });
+	}
+	
+</script>
+
+<style>
+.nav>li {
+	width: 115px;
+	float: left;
+}
+
+.nav>li:nth-child(1) {
+	width: 85px;
+}
+
+.nav>li:nth-child(3) {
+	width: 85px;
+}
+
+.nav>li:nth-child(4) {
+	width: 100px;
+}
+
+.nav ul {
+	list-style: none;
+	position: relative;
+	float: left;
+	margin: 0;
+	padding: 0
+}
+
+.nav li a {
+	display: block;
+	border: none;
+	color: white;
+}
+
+.nav li ul {
+	display: none;
+	position: absolute;
+	min-width: 120px;
+}
+
+.nav li:hover>ul {
+	display: block;
+	background-color: #6f9ad0;
+	color: white;
+}
+
+.nav li ul li:hover {
+	background-color: white;
+	color: black;
+}
+
+.nav li ul li a:hover {
+	background-color: white;
+	color: black;
+}
+
+.estiloMenuPrincipal {
+	color: #FFF;
+	font-weight: bold;
+}
+
+.estiloMenuPrincipal:hover {
+	background-color: white;
+	color: black;
+	font-weight: normal;
+}
+}
+</style>
+
+<div>
+	<div id="header">
+
+		<div class="container bs-docs-container">
+			<div id="logo" class="navbar-left headerContainer"></div>
+			<div id="nombre" class="navbar-left headerContainer"></div>
+			<h:form>
+				<div class="info_user">
+					<div id="day_info">
+						<ul style="text-align: right;">
+							<p:outputPanel id="pGOpenDay"
+								rendered="#{diaController.isOpenDay()}">
+								<li class="state_Current_Img"><img
+									src="#{ resource [ 'img:whiteUnLockIcon.png' ]}"
+									id="lock-unlock-icon" /></li>
+								<li class="state_Current_Date">Día Abierto</li>
+							</p:outputPanel>
+
+							<p:outputPanel id="pGClosedDay"
+								rendered="#{!diaController.isOpenDay()}">
+								<li class="state_Current_Img"><img
+									src="#{ resource [ 'img:whiteLockIcon.png' ]}"
+									id="lock-unlock-icon" /></li>
+								<li class="state_Current_Date">Día Cerrado</li>
+							</p:outputPanel>
+							<li class="current_Date"><h:outputText
+									value="#{diaController.getCurrentDay()}">
+									<f:convertDateTime pattern="dd/MM/yyyy" />
+								</h:outputText></li>
+							<li class="Nombre_User">#{loginController.userLogged.nombreUsuario}</li>
+						</ul>
+					</div>
+				</div>
+			</h:form>
+		</div>
+	</div>
+
+	<div id="navegacion" class="navbar navbar-default navbar-static-top ">
+		<div class="container bs-docs-container">
+			<ul class="nav navbar-nav">
+
+				<li class="hide" id="home"><h:link
+						outcome="#{msg['ruta.home']}" value="#{msg['menu.home']}" /></li>
+
+				<ui:fragment>
+					<li class="estiloMenuPrincipal"><h:panelGroup
+							style="cursor:default;"
+							rendered="#{(diaController.isAllowAdmin() or diaController.isAllowOper())}">Proceso Diario</h:panelGroup>
+						<ul>
+							<li id="valores"><a onclick="confirmarAbrirDia()" href="#">Apertura
+									del día</a></li>
+							<ui:fragment>
+								<li id="frecuentes" style="width: 135px;"><h:link
+										rendered="#{diaController.isOpenDay() and (diaController.isAllowAdmin() or diaController.isAllowOper())}"
+										outcome="#{msg['ruta.currency.cargaLocal']}"
+										value="#{msg['menu.cargaLocal']}" /></li>
+							</ui:fragment>
+							<li id="id_cargaFindur"><h:link
+									rendered="#{diaController.isOpenDay() and (diaController.isAllowAdmin() or diaController.isAllowOper())}"
+									outcome="#{msg['ruta.currency.cierreInter']}"
+									value="#{msg['menu.cargaInter']}" /></li>
+						</ul></li>
+				</ui:fragment>
+
+				<ui:fragment>
+					<li class="estiloMenuPrincipal"><h:panelGroup
+							style="cursor:default;">Consultas</h:panelGroup>
+						<ul>
+							<li id="feriados"><h:link
+									outcome="#{msg['ruta.feriados.calendarioFeriados.consulta.list']}"
+									value="Feriados" /></li>
+							<li id="consulta"><h:link
+									outcome="#{msg['ruta.currency.consulta.list']}" value="Monedas" /></li>
+							<li id="valores"><h:link
+									outcome="#{msg['ruta.currency.values.list']}" value="Valores" /></li>
+						</ul></li>
+				</ui:fragment>
+
+				<ui:fragment>
+					<li class="estiloMenuPrincipal" style="width: 120px;"><h:panelGroup style="cursor:default;"
+							rendered="#{(diaController.isAllowAdmin() or (diaController.isOpenDay() and diaController.isAllowOper()))}">Mantenimiento</h:panelGroup>
+						<ul>
+							<li id="feriados"><h:link
+									rendered="#{diaController.isAllowAdmin() or (diaController.isOpenDay() and diaController.isAllowOper())}"
+									outcome="#{msg['ruta.feriados.calendarioFeriados.list']}"
+									value="Feriados" /></li>
+							<li id="monedas"><h:link
+									rendered="#{diaController.isAllowAdmin() or (diaController.isOpenDay() and diaController.isAllowOper())}"
+									outcome="#{msg['ruta.currency.list']}" value="Monedas" /></li>
+							<li id="paises"><h:link
+									rendered="#{diaController.isAllowAdmin() or (diaController.isOpenDay() and diaController.isAllowOper())}"
+									outcome="#{msg['ruta.paises.list']}" value="Paises" /></li>
+						</ul></li>
+				</ui:fragment>
+
+				<ui:fragment>
+					<li class="estiloMenuPrincipal"><h:panelGroup
+							style="cursor:default;"
+							rendered="#{(diaController.isAllowAdmin() or diaController.isAllowAudit())}">
+							#{msg['menu.administracion']}</h:panelGroup>
+						<ul>
+							<li id="auditoria"><h:link
+									rendered="#{(diaController.isAllowAdmin() or diaController.isAllowOper() or diaController.isAllowAudit())}"
+									outcome="#{msg['ruta.auditoria.query']}" value="Auditoria" /></li>
+							<li id="cargaDesdeFindur"><h:link
+									rendered="#{diaController.isAllowAdmin()}"
+									outcome="#{msg['ruta.currency.cargarFindur']}"
+									value="Carga Findur" /></li>
+							<li id="migracion"><h:link
+									rendered="#{diaController.isAllowAdmin() or (diaController.isOpenDay() and diaController.isAllowOper())}"
+									outcome="#{msg['ruta.migration.action']}" value="Migración" /></li>
+							<li id="properties"><h:link
+									rendered="#{diaController.isAllowAdmin()}"
+									outcome="#{msg['ruta.properties.action']}" value="Propiedades" /></li>
+							<li id="tareas"><h:link
+									rendered="#{diaController.isAllowAdmin()}"
+									outcome="#{msg['ruta.tarea.list']}" value="Tareas" /></li>
+							<li id="usuarios"><h:link
+									rendered="#{(diaController.isAllowAdmin() or diaController.isAllowOper() or diaController.isAllowAudit())}"
+									outcome="#{msg['ruta.user.list']}" value="#{msg['menu.user']}" /></li>
+						</ul></li>
+				</ui:fragment>
+
+				<h:panelGroup rendered="#{false}">
+					<ui:fragment>
+						<li class="estiloMenuPrincipal" style="width: 120px;"><h:panelGroup
+								id="notificationsBaloons" style="cursor:default;">#{msg['menu.notifications']}</h:panelGroup>
+							<ul>
+								<li><h:link style="width: 150px;"
+										outcome="#{msg['ruta.notificaction.list']}"
+										value="#{msg['menu.notifications.list']}" /></li>
+								<li><ui:fragment
+										rendered="#{listarNotificacionController.nonReadedNotificationsERROR > 0}">
+										<span class="badge errorBaloon">#{listarNotificacionController.nonReadedNotificationsERROR}</span>
+									</ui:fragment></li>
+								<li><ui:fragment
+										rendered="#{listarNotificacionController.nonReadedNotificationsWARN > 0}">
+										<span class="badge warnBaloon">#{listarNotificacionController.nonReadedNotificationsWARN}</span>
+									</ui:fragment></li>
+								<li><ui:fragment
+										rendered="#{listarNotificacionController.nonReadedNotificationsINFO > 0}">
+										<span class="badge infoBaloon">#{listarNotificacionController.nonReadedNotificationsINFO}</span>
+									</ui:fragment></li>
+							</ul></li>
+					</ui:fragment>
+				</h:panelGroup>
+			</ul>
+			
+			<ul class="nav navbar-nav navbar-right" style="margin-right: -65px;">
+				<li style="width: 28px;">
+					<h:form id="formDownload">
+						<p:commandLink id="pdfAyuda" ajax="false" target="_blank" action="#{diaController.prepareForDownlaod()}" update="@form" >
+							<h:graphicImage value="#{resource['img/ayuda.png']}" width="20px" height="20px" style="text-align:right; margin-top: 2px;" />
+						    <p:fileDownload value="#{diaController.file}" contentDisposition="inline"/>
+						</p:commandLink>
+						<p:tooltip for="pdfAyuda" value="Ayuda" position="top" />
+					</h:form>
+				</li>
+				<li id="logout">
+					<a onclick="logOut()" style="line-height: 14px;width: 55px;"
+					class="glyphicon glyphicon-log-out">#{msg['logout.salir']}</a>
+				</li>
+			</ul>
+				
+		</div>
+	</div>
+</div>
+<div id="popUpLogOut" class="modal fade popUp">
+	<div class="modal-body">#{msg['logout.mensaje']}</div>
+	<div class="modal-footer">
+		<h:form>
+			<h:commandButton value="#{msg['logout.salir']}"
+				class="btn btn-success" action="#{logoutController.logout}"
+				render="messages" />
+			<button type="button" data-dismiss="modal" class="btn">#{msg['logout.cancelar']}</button>
+		</h:form>
+	</div>
+</div>
+
+<div id="popUpAbrirDia" class="modal fade popUp">
+	<div class="modal-body">Confirma abrir el día?</div>
+	<div class="modal-footer">
+		<h:form>
+			<center>
+				<h:commandButton value="Abrir día" class="btn btn-success"
+					rendered="#{diaController.isAllowAdmin() or diaController.isAllowOper()}"
+					action="#{diaController.abrirDia()}" render="pGOpenDay,pGClosedDay" />
+				<button type="button" data-dismiss="modal" class="btn">#{msg['logout.cancelar']}</button>
+			</center>
+		</h:form>
+	</div>
+</div>
+
+</html>

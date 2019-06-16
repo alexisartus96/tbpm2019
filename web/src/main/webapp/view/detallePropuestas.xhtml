@@ -6,27 +6,27 @@
 			<h:form>
 				<p:growl id="growl" showDetail="true" sticky="false" />
 				<h:panelGrid columns="2" columnClasses="label, value">
-					<p:outputLabel for="numero-convocatoria" value="Número convocatoria:" />
-					<p:inputText id="numero-convocatoria" value="#{convocatoria.processInstanceId}" required="true" />
+					<p:outputLabel for="numero-propuesta" value="Número propuesta:" />
+					<p:inputText id="numero-propuesta" value="#{detallePropuesta.processInstanceId}" required="true" />
 				</h:panelGrid>
-				<p:commandButton value="Confirmar" id="confirm" actionListener="#{convocatoria.loadActividades}" ajax="true" update="datos-convocatoria,growl"
+				<p:commandButton value="Confirmar" id="confirm" actionListener="#{detallePropuesta.loadActividades()}" ajax="true" update="datos-propuesta,growl"
 					styleClass="ui-priority-primary" />
 
-				<p:dataTable var="it" value="#{convocatoria.actividadesList}" id="datos-convocatoria">
+				<p:dataTable var="prop" value="#{detallePropuesta.actividadesList}" id="datos-propuesta">
 					<p:column headerText="Nombre">
-						<h:outputText value="#{it.nombre}" />
+						<h:outputText value="#{prop.nombre}" />
 					</p:column>
 
 					<p:column headerText="Fecha comienzo">
-						<h:outputText value="#{it.fechaComienzo}" />
+						<h:outputText value="#{prop.fechaComienzo}" />
 					</p:column>
 
 					<p:column headerText="Fecha fin">
-						<h:outputText value="#{it.fechaFin}" />
+						<h:outputText value="#{prop.fechaFin}" />
 					</p:column>
 
 					<p:column headerText="Responsable">
-						<h:outputText value="#{it.responsable}" />
+						<h:outputText value="#{prop.responsable}" />
 					</p:column>
 				</p:dataTable>
 			</h:form>

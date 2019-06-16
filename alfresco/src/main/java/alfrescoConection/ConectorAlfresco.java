@@ -49,7 +49,7 @@ public class ConectorAlfresco {
 		// Se sube el archivo a alfresco y se obtiene el mensaje de respuesta.
 		String uploadResponse = uploadDocument(ticketURLResponse, f, name, mimeType, "", null);
 
-		// Se aprsea la respuesta de alfresco para generar la URL de acceso
+		// Se parsea la respuesta de alfresco para generar la URL de acceso
 		String urlArchivo = "http://" + ipAlfresco + "/share/page/document-details?nodeRef="
 				+ obtenerUrlFromBody(uploadResponse);
 

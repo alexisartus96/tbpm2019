@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+  <title><ui:insert name="title">Titulo</ui:insert></title>
+</h:head>
+<body>
+	<div class="container login">	
+		<div class="row">
+			<h:form id="loginForm" class="form-signin">
+									
+				<div class="col-md-12" id="logo"></div>
+				<h3 class="form-signin-heading">Titulo</h3>
+
+				<p:inputText id="usernameInput" value="#{login.user}" required="true" label="Usuario"
+					styleClass="form-control" placeholder="Usuario">
+				</p:inputText>
+
+				<p:inputText id="passwordInput" value="#{login.password}" required="true" type="password"
+					style="font-size:medium"
+					styleclass="form-control" label="Contraseña"
+					placeholder="Contraseña">
+				</p:inputText>
+				
+				<h:commandButton id="login-button" value="Ingresar"
+					style="margin-left: 0px !important"
+					class="btn btn-lg btn-primary btn-block"
+					action="#{login.login}" 
+					render="messages" />
+				
+			</h:form>
+
+		</div>
+		<div class="row">
+			<div class="messageContainer">				
+				<h:messages styleClass="alert" errorClass="alert-danger"></h:messages>			
+			</div>		
+		</div>    
+	    
+	</div>
+	
+
+</body>
+
+</html>

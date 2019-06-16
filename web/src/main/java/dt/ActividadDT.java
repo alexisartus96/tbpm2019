@@ -1,8 +1,8 @@
-package beans;
+package dt;
 
 import java.io.Serializable;
 
-public class ActividadBean implements Serializable {
+public class ActividadDT implements Serializable {
 	private static final long serialVersionUID = 6495184856847888851L;
 
 	private Object nombre;

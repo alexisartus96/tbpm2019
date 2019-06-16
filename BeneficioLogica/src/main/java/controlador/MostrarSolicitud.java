@@ -58,6 +58,7 @@ public class MostrarSolicitud implements TaskListener{
 		delegateTask.getExecution().setVariable("rango_subsidio", solicitud.getRangoSubsidio());
 		delegateTask.getExecution().setVariable("prioridad", solicitud.getPrioridad());
 		delegateTask.getExecution().setVariable("solicitud_valida", solicitud.getValidado());
+		delegateTask.getExecution().setVariable("url_datos_solicitante", solicitud.getUrl_doc());
 		
 	}
 

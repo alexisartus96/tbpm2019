@@ -21,6 +21,7 @@ public class Login extends BaseController implements Serializable {
 	private String user;
 	private String password;
 	private String activeUser;
+	private String usrTipo;
 	private Boolean bps;
 
 	public void login() throws IOException {
@@ -31,8 +32,9 @@ public class Login extends BaseController implements Serializable {
 //		}
 //		activeUser=user;
 		System.out.println("hola");
-		Boolean login=(new LoginUsr()).loguin(user, password);
-		if(login) {
+		Long login=(new LoginUsr()).loguin(user, password);
+		usrTipo= login.toString();
+		if(login> new Long(0)) {
 			activeUser=user;
 		}else {
 			errorMessage("Credenciales Invalidas.");
@@ -73,5 +75,13 @@ public class Login extends BaseController implements Serializable {
 
 	public void setBps(Boolean bps) {
 		this.bps = bps;
+	}
+
+	public String getUsrTipo() {
+		return usrTipo;
+	}
+
+	public void setUsrTipo(String usrTipo) {
+		this.usrTipo = usrTipo;
 	}
 }

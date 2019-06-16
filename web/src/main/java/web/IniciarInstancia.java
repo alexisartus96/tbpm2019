@@ -20,8 +20,8 @@ import org.json.JSONObject;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
-import beans.PropuestaDT;
 import constantes.Constantes;
+import dt.PropuestaDT;
 
 @Named
 @SessionScoped

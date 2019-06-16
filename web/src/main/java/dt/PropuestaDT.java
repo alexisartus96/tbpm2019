@@ -1,10 +1,11 @@
-package beans;
+package dt;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 
-public class PropuestaDT {
+public class PropuestaDT implements Serializable{
 	
 	public PropuestaDT() {
 	}

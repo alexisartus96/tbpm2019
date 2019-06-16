@@ -18,7 +18,7 @@ public class LoginUsr {
 		
 	}
 
-	public Boolean loguin(String usr, String pasw) {
+	public Long loguin(String usr, String pasw) {
 		EntityManagerFactory emf = Persistence
 				.createEntityManagerFactory("EmployeePU");
 		EntityManager em = emf.createEntityManager();
@@ -30,6 +30,8 @@ public class LoginUsr {
 		q.setParameter("contraseña", pasw);
 		List<UsuariosBpsWeb> usuarios= q.getResultList();
 		et.commit();
-		return (usuarios.size()>0);
+		if(usuarios.size()>0) {
+			return usuarios.get(0).getTipo();
+		}else return new Long(0);
 	}
 }

@@ -16,7 +16,8 @@ import java.util.Date;
 @NamedQuery(name="Solicitud.byId", query="SELECT s FROM Solicitud s WHERE s.id.ci =:ci AND s.id.idProceso =:idProceso"),
 @NamedQuery(name="Solicitud.byProcesoId", query="SELECT s FROM Solicitud s WHERE s.id.idProceso =:idProceso"),
 @NamedQuery(name="Solicitud.ValidadasByProcesoId", query="SELECT s FROM Solicitud s WHERE s.id.idProceso =:idProceso and s.validado=true ORDER by s.prioridad ASC"),
-@NamedQuery(name="Solicitud.ByProcesoIdOrderPrioridad", query="SELECT s FROM Solicitud s WHERE s.id.idProceso =:idProceso ORDER by s.prioridad ASC")
+@NamedQuery(name="Solicitud.ByProcesoIdOrderPrioridad", query="SELECT s FROM Solicitud s WHERE s.id.idProceso =:idProceso ORDER by s.prioridad ASC"),
+@NamedQuery(name="Solicitud.ConfirmadasByProcesoId", query="SELECT s FROM Solicitud s WHERE s.id.idProceso =:idProceso and s.confirmado=true ORDER by s.prioridad ASC")
 })
 public class Solicitud implements Serializable {
 	private static final long serialVersionUID = 1L;

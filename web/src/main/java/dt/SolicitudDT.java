@@ -1,4 +1,4 @@
-package beans;
+package dt;
 
 import org.primefaces.model.UploadedFile;
 

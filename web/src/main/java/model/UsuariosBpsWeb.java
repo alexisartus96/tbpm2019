@@ -21,6 +21,8 @@ public class UsuariosBpsWeb implements Serializable {
 	private String usuario;
 
 	private String contraseña;
+	
+	private Long tipo;
 
 	public UsuariosBpsWeb() {
 	}
@@ -39,6 +41,14 @@ public class UsuariosBpsWeb implements Serializable {
 
 	public void setContraseña(String contraseña) {
 		this.contraseña = contraseña;
+	}
+
+	public Long getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(Long tipo) {
+		this.tipo = tipo;
 	}
 
 }

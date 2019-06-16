@@ -28,7 +28,7 @@ public class FileUploader{
 			String processInstanceId = execution.getProcessInstanceId();
 			
 			
-			JSONObject jsonResponseTaskID = Unirest.get("http://localhost:8080/activiti-rest/service/history/historic-task-instances")
+			JSONObject jsonResponseTaskID = Unirest.get("http://localhost:8082/activiti-rest/service/history/historic-task-instances")
 					.basicAuth(user, password)
 					.queryString("processInstanceId", processInstanceId)
 					.queryString("taskName", taskName)
@@ -37,7 +37,7 @@ public class FileUploader{
 			JSONArray data = jsonResponseTaskID.getJSONArray("data");
 			String taskId = data.getJSONObject(data.length()-1).getString("id");
 			// Obtengo la cookie de la sesión
-			HttpResponse<InputStream> response = Unirest.post("http://localhost:8080/activiti-app/app/authentication")
+			HttpResponse<InputStream> response = Unirest.post("http://localhost:8082/activiti-app/app/authentication")
 					.header("Content-Type", "application/x-www-form-urlencoded")
 					.body("j_username=" + user + "&j_password=" + password + "&_spring_security_remember_me=true&submit=Login")
 					.asBinary();
@@ -46,7 +46,7 @@ public class FileUploader{
 			System.out.println(coockie);
 
 			// Obtengo atachmentId del archivo que se adjunto
-			JSONObject jsonResponse = Unirest.get("http://localhost:8080/activiti-app/app/rest/tasks/{taskId}/content")
+			JSONObject jsonResponse = Unirest.get("http://localhost:8082/activiti-app/app/rest/tasks/{taskId}/content")
 					.routeParam("taskId", taskId)
 					.header("cookie", coockie)
 					.asJson().getBody().getObject();
@@ -65,7 +65,7 @@ public class FileUploader{
 
 			
 			// Obtengo el archivo
-			response = Unirest.get("http://localhost:8080/activiti-app/app/rest/content/{attachmentId}/raw")
+			response = Unirest.get("http://localhost:8082/activiti-app/app/rest/content/{attachmentId}/raw")
 					.routeParam("attachmentId", attachmentId.toString())
 					.header("cookie", coockie)
 					.asBinary();

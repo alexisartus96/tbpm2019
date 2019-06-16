@@ -24,8 +24,8 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 
 import alfrescoConection.ConectorAlfresco;
 import alfrescoConection.FileUploader;
-import beans.SolicitudDT;
 import constantes.Constantes;
+import dt.SolicitudDT;
 
 @Named
 @SessionScoped
@@ -95,7 +95,7 @@ public class SolicitarBeneficio implements Serializable {
 			props.put("integrantes_familia", datosSolicitud.getIntegrantes_familia());
 			props.put("otros_ingresos", datosSolicitud.getOtros_ingresos());
 			props.put("url_datos_solicitante", "127.0.0.1:8080/share/proxy/alfresco/slingshot/node/content/workspace/SpacesStore/"+
-						Constantes.alfrescofolderID + fileName);
+						Constantes.alfrescofolderID +"/"+ fileName+"?a=true");
 
 			List<JSONObject> properties = new ArrayList();
 			for (Map.Entry<String, Object> e : props.entrySet()) {

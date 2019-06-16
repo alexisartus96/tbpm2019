@@ -52,6 +52,7 @@ public class MostrarSolicitudFlecha implements ExecutionListener{
 		execution.setVariable("otros_ingresos", solicitud.getOtrosIngresos());
 		execution.setVariable("mail_solicitante", solicitud.getMailSolicitante());
 		execution.setVariable("rango_subsidio", solicitud.getRangoSubsidio());
+		execution.setVariable("url_datos_solicitante", solicitud.getUrl_doc());
 	}
 
 }

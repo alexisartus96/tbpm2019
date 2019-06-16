@@ -4,8 +4,8 @@
 	<h:form>
 		<p:menubar class="navbar">
 			<p:menuitem value="Inicio" icon="fa fa-home" url="/" />
-			<p:menuitem value="Crear Propuesta" icon="fa fa-plus-square" url="/view/iniciarPropuesta.xhtml" rendered="#{login.activeUser eq 'bps'}" />
-			<p:menuitem value="Ver Instancias" icon="fa fa-eye" url="/view/convocatoria.xhtml" rendered="#{login.activeUser eq 'beneficios'}" />
+			<p:menuitem value="Crear Propuesta" icon="fa fa-plus-square" url="/view/iniciarPropuesta.xhtml" rendered="#{login.activeUser!=null and login.usrTipo==1}" />
+			<p:menuitem value="Ver Instancias" icon="fa fa-eye" url="/view/detallePropuestas.xhtml" rendered="#{login.activeUser!=null and login.usrTipo==2}" />
 			<p:menuitem value="Ver propuestas vigentes" icon="fa fa-eye" url="/view/listarPropuestas.xhtml" />
 
 			<f:facet class="button-logout" name="options">

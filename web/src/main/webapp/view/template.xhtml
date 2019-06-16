@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<f:facet name="first">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+	</f:facet>
+	<meta http-equiv="refresh" content="url=/cotiza/login/login.xhtml" />
+
+	<title><ui:insert name="title">Sistema Cotizaciones</ui:insert></title>
+	<h:outputStylesheet library="css" name="bootstrap.css" />
+	<h:outputStylesheet library="css" name="cotizaciones.css" />
+	<h:outputStylesheet library="css" name="datepicker.css" />
+	<h:outputStylesheet library="css" name="datepicker3.css" />
+	<h:outputStylesheet library="css" name="bootstrap-switch.css" />
+	<h:outputStylesheet library="css" name="jquery.dataTables.css" />
+
+	<h:outputScript library="js" name="bootstrap-switch.js" />
+	<h:outputScript library="js" name="bootstrap.js" />
+	<h:outputScript library="js" name="jquery.dataTables.js" />
+	<h:outputScript library="js" name="modernizr.custom.79956.js" />
+	<h:outputScript library="js" name="bootstrap-datepicker.js" />
+	<h:outputScript library="js" name="locales/bootstrap-datepicker.es.js" />
+	<h:outputScript library="js" name="cotizaciones.js" />
+
+</h:head>
+
+<body>
+
+	<div class="wrapper">
+		<ui:include src="/WEB-INF/template/header.xhtml" />
+		<div id="content" class="container bs-docs-container" >
+			<div class="contenido">
+				<div class="row">
+					<div class="messageContainer" id="messageContainer">
+						<div class="row">
+							<p:growl id="growl-error" showDetail="false"
+								severity="error" life="10000" escape="false"/>
+						</div>
+	
+						<div class="row">
+							<p:growl id="growl-success" showDetail="false"
+								severity="info" life="10000" escape="false"/>
+						</div>
+						
+						<div class="row">
+							<p:growl id="growl-warning" showDetail="false"
+								severity="warning" life="10000" escape="false"/>
+						</div>
+					</div>
+				</div>
+				<ui:insert name="content">
+				</ui:insert>
+			</div>
+		</div>
+	</div>
+	
+	
+	<div id="footer" class="footer">
+		<div class="container bs-docs-container">
+			<p:outputPanel id="version">
+				<li class="state_Current_Date" style="font-weight: normal !important; width:49%;">Cotizaciones</li>
+			</p:outputPanel>
+		</div>
+	</div>
+
+</body>
+
+</html>
