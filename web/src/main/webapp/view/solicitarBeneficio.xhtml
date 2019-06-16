@@ -5,10 +5,11 @@
 		<div class="ui-g">
 			<div class="ui-g-3"></div>
 			<div class="ui-g-6">
-				<h:form enctype="multipart/form-data">
+				<h:form class="form-style-6" enctype="multipart/form-data">
+				<h1>Solicitar Beneficio</h1>
 					<p:growl id="growl" showDetail="true" sticky="true" />
-
-					<h:panelGrid columns="2" columnClasses="label, value">
+					<div class="section">
+					<h:panelGrid class="inner-wrap flex-container" columns="2" columnClasses="label, value">
 						<p:outputLabel for="ci" value="CI:" />
 						<p:inputNumber id="ci" value="#{solicitarBeneficio.datosSolicitud.identificacion}" required="true" />
 					
@@ -52,9 +53,9 @@
 						<p:fileUpload id="file" value="#{solicitarBeneficio.datosSolicitud.file}" mode="simple" skinSimple="true"/>
 
 					</h:panelGrid>
-
-					<p:commandButton value="Confirmar" id="confirm" actionListener="#{solicitarBeneficio.actionConfirm()}" ajax="false" styleClass="ui-priority-primary" />
-
+					
+					<p:commandButton class="button" value="Confirmar" id="confirm" actionListener="#{solicitarBeneficio.actionConfirm()}" ajax="false" styleClass="ui-priority-primary" />
+					</div>
 				</h:form>
 			</div>
 			<div class="ui-g-3"></div>

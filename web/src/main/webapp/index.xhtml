@@ -6,9 +6,10 @@
 	</h:head>
 	<ui:define name="content">
 		<ui:fragment rendered="#{empty login.activeUser}">
-		<h:form>
-			<div class="flex-container">
-				<h:panelGrid columns="2" cellpadding="5">
+		<h:form class="form-style-6">
+		<h1>Login</h1>
+			<div class="section">
+				<h:panelGrid class="inner-wrap flex-container" columns="2" cellpadding="5">
 					<h:outputLabel for="username" value="Username:" />
 					<p:inputText id="username" value="#{login.user}" required="true" label="username" />
 
@@ -16,7 +17,7 @@
 					<p:password id="password" value="#{login.password}" required="true" label="password" />
 
 					<f:facet name="footer">
-						<p:commandButton value="Login" actionListener="#{login.login()}" ajax="false"/>
+						<p:commandButton class="button" value="Login" actionListener="#{login.login()}" ajax="false"/>
 					</f:facet>
 				</h:panelGrid>
 			</div>

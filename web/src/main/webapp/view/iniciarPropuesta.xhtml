@@ -5,44 +5,47 @@
 		<div class="ui-g">
 			<div class="ui-g-3"></div>
 			<div class="ui-g-6">
-				<h:form>
+				<h:form class="form-style-6">
+				<h1>Crear nueva propuesta</h1>
 					<p:growl id="growl" showDetail="true" sticky="true" /> 
-				
-					<ui:param name="dm" value="#{iniciarInstancia.datosPropuesta}" />
-					<h:panelGrid columns="2" columnClasses="label, value">
-						<p:outputLabel for="identificacion" value="Identificacion" />
-						<p:inputNumber id="identificacion" value="#{dm.identificacion}" required="true" />
-						
-						<p:outputLabel for="fecha_prevista" value="Fecha prevista para inicio de postulaciones :" />
-						<p:calendar id="fecha_prevista" value="#{dm.fecha_prevista_date}" required="true" showOn="button" />
-
-						<p:outputLabel for="bases_llamado" value="Bases del llamado:" />
-						<p:inputTextarea id="bases_llamado" value="#{dm.bases_llamado}" required="true" />
-
-						<p:outputLabel for="monto_total" value="Monto total" />
-						<p:inputNumber id="monto_total" value="#{dm.monto_total}" required="true" />
-
-						<p:outputLabel for="alto" value="Alto" />
-						<p:inputNumber id="alto" value="#{dm.alto}" required="true" />
-
-						<p:outputLabel for="medio" value="Medio" />
-						<p:inputNumber id="medio" value="#{dm.medio}" required="true" />
-
-						<p:outputLabel for="bajo" value="Bajo" />
-						<p:inputNumber id="bajo" value="#{dm.bajo}" required="true" />
-
-						<p:outputLabel for="descripcion" value="Descripción:" />
-						<p:inputText id="descripcion" value="#{dm.descripcion}" required="true" />
-
-						<p:outputLabel for="persona_bps" value="Contacto de BPS" />
-						<p:inputText id="persona_bps" value="#{dm.persona_bps}" required="true" />
-
-						<p:outputLabel for="mail" value="Dirección de mail del contacto de BPS" />
-						<p:inputText id="mail" value="#{dm.mail}" required="true" placeholder="example@server.com" />
-					</h:panelGrid>
-
-					<p:commandButton value="Confirmar" id="confirm" actionListener="#{iniciarInstancia.actionConfirm()}" ajax="false" styleClass="ui-priority-primary" />
-
+					<div class="section">
+						<ui:param name="dm" value="#{iniciarInstancia.datosPropuesta}" />
+						<h:panelGrid class="inner-wrap flex-container" columns="2" columnClasses="label, value">
+							<p:outputLabel for="identificacion" value="Identificacion" />
+							<p:inputNumber id="identificacion" value="#{dm.identificacion}" required="true" />
+							
+							<p:outputLabel for="fecha_prevista" value="Fecha prevista:" />
+							<p:calendar id="fecha_prevista" value="#{dm.fecha_prevista_date}" required="true" showOn="button" />
+	
+							<p:outputLabel for="bases_llamado" value="Bases del llamado:" />
+							<p:inputTextarea id="bases_llamado" value="#{dm.bases_llamado}" required="true" />
+	
+							<p:outputLabel for="monto_total" value="Monto total" />
+							<p:inputNumber id="monto_total" value="#{dm.monto_total}" required="true" />
+	
+							<p:outputLabel for="alto" value="Alto" />
+							<p:inputNumber id="alto" value="#{dm.alto}" required="true" />
+	
+							<p:outputLabel for="medio" value="Medio" />
+							<p:inputNumber id="medio" value="#{dm.medio}" required="true" />
+	
+							<p:outputLabel for="bajo" value="Bajo" />
+							<p:inputNumber id="bajo" value="#{dm.bajo}" required="true" />
+	
+							<p:outputLabel for="descripcion" value="Descripción:" />
+							<p:inputText id="descripcion" value="#{dm.descripcion}" required="true" />
+	
+							<p:outputLabel for="persona_bps" value="Contacto de BPS" />
+							<p:inputText id="persona_bps" value="#{dm.persona_bps}" required="true" />
+	
+							<p:outputLabel for="mail" value="Dirección de mail del contacto de BPS" />
+							<p:inputText id="mail" value="#{dm.mail}" required="true" placeholder="example@server.com" />
+							
+							<p:commandButton class="button" value="Confirmar" id="confirm" actionListener="#{iniciarInstancia.actionConfirm()}" ajax="false" styleClass="ui-priority-primary" />
+							
+						</h:panelGrid>
+					
+					</div>
 				</h:form>
 			</div>
 			<div class="ui-g-3"></div>

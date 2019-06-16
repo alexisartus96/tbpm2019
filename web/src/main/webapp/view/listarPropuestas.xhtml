@@ -2,20 +2,20 @@
 	xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets" template="/template.xhtml">
 
 	<ui:define name="content">
-		<div class="flex-container">
-			<p:dataTable var="it" value="#{listarPropuestasController.getPropuestas()}">
-				<p:column headerText="Número">
+		<div class="table-container">
+			<p:dataTable class="wrap-table100" var="it" value="#{listarPropuestasController.getPropuestas()}">
+				<p:column class="row cell" headerText="Número">
 					<h:outputText value="#{it.identificacion}" />
 				</p:column>
 
-				<p:column headerText="Fecha">
+				<p:column class="row cell" headerText="Fecha">
 					<h:outputText value="#{it.fecha_prevista}" />
 				</p:column>
-				<p:column headerText="Bases Llamado">
+				<p:column class="row cell" headerText="Bases Llamado">
 					<h:outputText value="#{it.bases_llamado}" />
 				</p:column>
 
-				<p:column>
+				<p:column class="row cell">
 					<p:commandLink id="ajax" actionListener="#{solicitarBeneficio.redirect(it.identificacion)}" rendered="#{empty login.activeUser and it.recibirSolicitud}">
 						<h:outputText value="Postularse" />
 					</p:commandLink>
