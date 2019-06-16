@@ -40,7 +40,7 @@ public class IniciarInstancia implements Serializable {
 		
 	}
 	
-	public void actionConfirm(ActionEvent actionEvent) throws UnirestException {
+	public void actionConfirm() throws UnirestException {
 		FacesContext context = FacesContext.getCurrentInstance();
 		try {
 			// Inicio la instancia del proceso
