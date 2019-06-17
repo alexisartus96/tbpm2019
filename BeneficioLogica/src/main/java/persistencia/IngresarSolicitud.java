@@ -12,6 +12,8 @@ import org.activiti.engine.delegate.DelegateExecution;
 import org.activiti.engine.delegate.DelegateTask;
 import org.activiti.engine.delegate.TaskListener;
 
+import alfrescoConection.FileUploader;
+
 public class IngresarSolicitud implements TaskListener{
 
 	public void notify(DelegateTask delegateTask) {
@@ -21,8 +23,11 @@ public class IngresarSolicitud implements TaskListener{
 		
 		HashMap<String, Object> variables= (HashMap<String, Object>) delegateTask.getVariables();
 		
+		
+		
 		Solicitud solicitud= new Solicitud();
 		SolicitudPK soliPK = new SolicitudPK();
+		
 		try {
 			if(variables.get("ci") instanceof Long) {
 				soliPK.setCi((Long)variables.get("ci"));
