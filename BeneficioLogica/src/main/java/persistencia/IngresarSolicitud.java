@@ -27,6 +27,8 @@ public class IngresarSolicitud implements TaskListener{
 		
 		Solicitud solicitud= new Solicitud();
 		SolicitudPK soliPK = new SolicitudPK();
+		DelegateExecution task=delegateTask.getExecution();
+		
 		
 		try {
 			if(variables.get("ci") instanceof Long) {
@@ -55,6 +57,11 @@ public class IngresarSolicitud implements TaskListener{
 		solicitud.setApellido((String) variables.get("apellido"));
 		solicitud.setDatosFamiliares((String) variables.get("informacion_familiar"));
 
+//		String urlArchivo = (String) task.getVariable("url_datos_solicitante");
+//		if (urlArchivo == null) {
+//			urlArchivo = FileUploader.cargaArchivo(task, "Recibir Solicitudes");
+//		}
+//		solicitud.setUrl_doc(urlArchivo);
 		if(variables.get("url_datos_solicitante")!=null) solicitud.setUrl_doc((String)(variables.get("url_datos_solicitante")));
 		
 		try {

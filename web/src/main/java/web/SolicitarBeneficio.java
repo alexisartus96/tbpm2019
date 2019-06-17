@@ -94,8 +94,9 @@ public class SolicitarBeneficio implements Serializable {
 			props.put("nivel_educativo", datosSolicitud.getNivel_educativo());
 			props.put("integrantes_familia", datosSolicitud.getIntegrantes_familia());
 			props.put("otros_ingresos", datosSolicitud.getOtros_ingresos());
-			props.put("url_datos_solicitante", "127.0.0.1:8080/share/proxy/alfresco/slingshot/node/content/workspace/SpacesStore/"+
-						Constantes.alfrescofolderID +"/"+ fileName+"?a=true");
+			props.put("url_datos_solicitante", url);
+//			props.put("url_datos_solicitante", "127.0.0.1:8080/share/proxy/alfresco/slingshot/node/content/workspace/SpacesStore/"+
+//						Constantes.alfrescofolderID +"/"+ fileName+"?a=true");
 
 			List<JSONObject> properties = new ArrayList();
 			for (Map.Entry<String, Object> e : props.entrySet()) {

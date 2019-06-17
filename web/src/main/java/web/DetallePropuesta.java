@@ -57,20 +57,19 @@ public class DetallePropuesta implements Serializable {
 					actividadBean.setFechaFin("En curso");
 				}
 				if (actividadBean.getResponsable().equals(JSONObject.NULL)) {
-					actividadBean.setResponsable("La actividad aÃºn no ha sido tomada.");
+					actividadBean.setResponsable("La actividad aún no ha sido tomada.");
 				}
 
 				actividadesList.add(actividadBean);
 			}
 
 		} catch (UnirestException e) {
-			logger.log(Level.ERROR, "Error al obtener actividades de la convocatoria", e);
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error", "Ocurrio un error al crear la movilidad."));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error", "Ocurrio un error."));
 			e.printStackTrace();
 		}
 		if (actividadesList.isEmpty()) {
 			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage("Error", "No se encontro ninguna convocatoria vigente con el nÃºmero ." + processInstanceId));
+					new FacesMessage("Error", "No se encontro ninguna propuesta vigente con el número ." + processInstanceId));
 		}
 		
 	}
